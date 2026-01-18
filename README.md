@@ -1,15 +1,16 @@
-Aufgabe 8: DeerFit – Das Fitnessstudio des Hirsches
+# Aufgabe 8: DeerFit – Das Fitnessstudio des Hirsches
 
-Idee: Wie kann ein Hirsch Python nutzen, um ein modernes Fitnessstudio für Waldtiere zu betreiben?
+## Idee
+Wie kann ein Hirsch Python nutzen, um ein modernes Fitnessstudio für Waldtiere zu betreiben?
 
-Aufgabe: Erstelle eine Python-basierte Anwendung, in der Diego, der Hirsch, ein Fitnessstudio auf der
-Waldlichtung eröffnet und Code verwendet, um:
+## Aufgabe
+Erstelle eine Python-basierte Anwendung, in der Diego, der Hirsch, ein Fitnessstudio auf der Waldlichtung eröffnet und Code verwendet, um:
 
-• Mitgliedschaften zu verwalten (Tiernamen, Mitgliedschaftstyp, Ablaufdatum)
-• Kurspläne zu erstellen (Yoga, Krafttraining, Ausdauerlauf, Schwimmkurse)
-• Kursbuchungen abzuwickeln (Anmeldungen, Wartelisten, Absagen)
-• Trainingsfortschritte zu dokumentieren (Gewicht, Ausdauer, persönliche Rekorde)
-• Gewinne und Ausgaben zu erfassen (Mitgliedsbeiträge, Gerätekosten, Trainerhonorare)
-• Fitnessberichte zu visualisieren (Fortschrittskurven der letzten Monate)
-• Klassen für Mitglieder, Kurse, Trainer und Geräte zu verwenden
-• Personalisierte Trainingspläne zu empfehlen (basierend auf Zielen und Fortschritt) (sei hier kreativ)
+- Mitgliedschaften zu verwalten (Tiernamen, Mitgliedschaftstyp, Ablaufdatum)
+- Kurspläne zu erstellen (Yoga, Krafttraining, Ausdauerlauf, Schwimmkurse)
+- Kursbuchungen abzuwickeln (Anmeldungen, Wartelisten, Absagen)
+- Trainingsfortschritte zu dokumentieren (Gewicht, Ausdauer, persönliche Rekorde)
+- Gewinne und Ausgaben zu erfassen (Mitgliedsbeiträge, Gerätekosten, Trainerhonorare)
+- Fitnessberichte zu visualisieren (Fortschrittskurven der letzten Monate)
+- Klassen für Mitglieder, Kurse, Trainer und Geräte zu verwenden
+- Personalisierte Trainingspläne zu empfehlen (basierend auf Zielen und Fortschritt) *(sei hier kreativ)*
