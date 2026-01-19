@@ -18,3 +18,8 @@
 - Web-UI mit Admin und Usersicht -> Anmeldebildschirm, Routing?
 - Trainingsempfehlungen machen -> Hinterlegen, welche Muskelgruppen wann optimal trainiert werden müssten? Oder aus Gewohnheiten der Person ableitend?
 
+
+# Bisheriger Fortschritt
+
+- Erstellen der Basisdateien
+- Füllen der ersten Version der Kurs-Klassen
