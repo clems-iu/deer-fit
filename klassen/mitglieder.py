@@ -11,13 +11,17 @@ class Mitglied:
     def __str__(self):
         return f"{self.vorname} {self.nachname} (Mitgliedsnummer: {self.mitgliedsnummer})"  
     
+    def trainingsfortschritt_hinzufuegen(self, fortschritt):
+        self.trainingsfortschritt.append(fortschritt)
+    
 class trainingsfortschritt:
-    def __init__(self, datum, beschreibung):
+    def __init__(self, datum, übung, max):
         self.datum = datum
-        self.beschreibung = beschreibung
+        self.übung = übung
+        self.max = max
 
     def __str__(self):
-        return f"Am {self.datum}: {self.beschreibung}"
+        return f"Am {self.datum}: {self.übung} (Bester Wert: {self.max})"
     
 class mitgliedschaft:
     def __init__(self, typ, startdatum, enddatum):
