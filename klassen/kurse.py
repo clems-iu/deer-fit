@@ -41,17 +41,19 @@ class Kursbuchung:
         return f"{self.mitglied} hat sich für {self.kurs} am {self.datum} angemeldet."
     
 class Kursplan:
-    def __init__(self):
-        self.kurse = []
+    def __init__(self, start, end, kurstermine=[]):
+        self.start = start # Startdatum des Kursplans
+        self.end = end # Enddatum des Kursplans
+        self.kurstermine = kurstermine # Liste der Kurstermine im Kursplan
 
-    def kurs_hinzufuegen(self, kurs):
-        self.kurse.append(kurs)
+    def kurstermin_hinzufuegen(self, kurstermin):
+        self.kurstermine.append(kurstermin)
         
-    def kurs_entfernen(self, kurs):
-        self.kurse.remove(kurs)    
-
-    def alle_kurse_anzeigen(self):
-        for kurs in self.kurse:
-            print(kurs)
+    def kurstermin_entfernen(self, kurstermin):
+        self.kurstermine.remove(kurstermin)    
+        
+    def alle_termine_anzeigen(self):
+        for kurstermin in self.kurstermine:
+            print(kurstermin)
             
             
