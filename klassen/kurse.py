@@ -16,20 +16,20 @@ class Kurstermin:
         self.kurs = kurs
         self.datum = datum  # Datum des Kurstermins
         self.uhrzeit = uhrzeit  # Uhrzeit des Kurstermins
-        self.teilnehmer = []  # Liste der angemeldeten Mitglieder
+        self.kursbuchungen = []  # Liste der angemeldeten Mitglieder
 
-    def teilnehmer_hinzufuegen(self, mitglied):
-        if len(self.teilnehmer) < self.kurs.max_teilnehmer:
-            self.teilnehmer.append(mitglied)
+    def teilnehmer_hinzufuegen(self, buchung):
+        if len(self.kursbuchungen) < self.kurs.max_teilnehmer:
+            self.kursbuchungen.append(buchung)
         else:
             print("Kurs ist voll!")
 
-    def teilnehmer_entfernen(self, mitglied):
-        self.teilnehmer.remove(mitglied)
+    def teilnehmer_entfernen(self, buchung):
+        self.kursbuchungen.remove(buchung)
 
     def __str__(self):
-        return f"{self.kurs.name} am {self.datum} um {self.uhrzeit} mit {len(self.teilnehmer)}/{self.kurs.max_teilnehmer} Teilnehmern"
-    
+        return f"{self.kurs.name} am {self.datum} um {self.uhrzeit} mit {len(self.kursbuchungen)}/{self.kurs.max_teilnehmer} Teilnehmern"
+
         
 class Kursbuchung:
     def __init__(self, mitglied, kurs, datum):
