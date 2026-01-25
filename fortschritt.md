@@ -23,6 +23,8 @@
 
 - Erstellen der Basisdateien
 - Füllen der ersten Version der Kurs-Klassen
+- Füllen der ersten Version der Mitglied-Klassen
+- Entscheidung **streamlit** für UI zu nutzen
 
 
 # Aufbau der bisher erstellten Klassen
