@@ -13,8 +13,8 @@
 # Umsetzung
 
 - Speicherungssystem ausdenken, welches sauberen schnellen Zugriff ermöglicht
-- Klassen erstellen welche alle nötigen Objekte beschreiben
-- Basis Initialierung mit einigen Mitgliedern, Trainern, Kursen und Equipment
+- Klassen mit Attributen und Funktionen erstellen welche alle nötigen Objekte in diesem System beschreiben
+- Basis Initialierung mit einigen Mitgliedern, Trainern, Kursen und Equipment einrichten um initiale Verwendung zu ermöglichen (Erstmal im Terminal)
 - Web-UI mit Admin und Usersicht -> Anmeldebildschirm, Routing?
 - Trainingsempfehlungen machen -> Hinterlegen, welche Muskelgruppen wann optimal trainiert werden müssten? Oder aus Gewohnheiten der Person ableitend?
 
@@ -23,3 +23,11 @@
 
 - Erstellen der Basisdateien
 - Füllen der ersten Version der Kurs-Klassen
+
+
+# Aufbau der bisher erstellten Klassen
+
+Kursplan 1:n Kurstermine
+Kurs 1:n Kurstermin 1:n Kursbuchung 
+Mitglied 1:1 Mitgliedschaft
+Mitglied 1:n Trainingfortschritte
