@@ -12,11 +12,14 @@
 
 # Umsetzung
 
-- Speicherungssystem ausdenken, welches sauberen schnellen Zugriff ermöglicht
+- Speicherungssystem ausdenken, welches sauberen schnellen Zugriff für alle Screens ermöglicht
 - Klassen mit Attributen und Funktionen erstellen welche alle nötigen Objekte in diesem System beschreiben
 - Basis Initialierung mit einigen Mitgliedern, Trainern, Kursen und Equipment einrichten um initiale Verwendung zu ermöglichen (Erstmal im Terminal, initiale Daten aus csv?)
+- Trainingsempfehlungen machen -> Hinterlegen, welche Muskelgruppen wann optimal trainiert werden müssten? Oder aus Trainingszielen der Person ableitend? 
+
 - Web-UI mit Admin und Usersicht -> Anmeldebildschirm, Routing?
-- Trainingsempfehlungen machen -> Hinterlegen, welche Muskelgruppen wann optimal trainiert werden müssten? Oder aus Gewohnheiten der Person ableitend?
+    - User hat gebuchte Kurse, Kursplan, Fortschritte und Trainingsempfehlungen
+    - Admin hat Kostenverlauf, Ausstattung, Belegung und Kursplan mit mehr Details
 
 
 # Bisheriger Fortschritt
@@ -24,12 +27,12 @@
 - Erstellen der Basisdateien
 - Füllen der ersten Version der Kurs-Klassen
 - Füllen der ersten Version der Mitglied-Klassen
-- Entscheidung **streamlit** für UI zu nutzen
+- Entscheidung **streamlit** für UI zu nutzen, **Faker** für random Daten?
 
 
 # Aufbau der bisher erstellten Klassen
 
-Kursplan 1:n Kurstermine
-Kurs 1:n Kurstermin 1:n Kursbuchung 
-Mitglied 1:1 Mitgliedschaft
-Mitglied 1:n Trainingfortschritte
+- Kursplan 1:n Kurstermine
+- Kurs 1:n Kurstermin 1:n Kursbuchung 
+- Mitglied 1:1 Mitgliedschaft
+- Mitglied 1:n Trainingfortschritte
