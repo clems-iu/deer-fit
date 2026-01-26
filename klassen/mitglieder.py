@@ -1,12 +1,12 @@
 # Enthält die Klassen für Mitglieder, Trainingsfortschritte und Mitgliedschaften im Deer-Fit System.
 
 class Mitglied:
-    def __init__(self, vorname, nachname, mitgliedsnummer):
+    def __init__(self, vorname, nachname, mitgliedsnummer, trainingsfortschritt=[], mitgliedschaft=[]):
         self.vorname = vorname
         self.nachname = nachname
         self.mitgliedsnummer = mitgliedsnummer
-        self.trainingsfortschritt = []
-        self.mitgliedschaft = []
+        self.trainingsfortschritt = trainingsfortschritt
+        self.mitgliedschaft = mitgliedschaft
 
     def __str__(self):
         return f"{self.vorname} {self.nachname} (Mitgliedsnummer: {self.mitgliedsnummer})"  
