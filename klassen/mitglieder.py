@@ -1,7 +1,36 @@
 # Enthält die Klassen für Mitglieder, Trainingsfortschritte und Mitgliedschaften im Deer-Fit System.
 
 class Mitglied:
-    def __init__(self, vorname, nachname, mitgliedsnummer, trainingsfortschritt=[], mitgliedschaft=[]):
+    def trainingsplan_empfehlung(self, ziel="Allgemein", fortschritt=None):
+        # Kreative, einfache Logik für Trainingsplan-Empfehlung
+        if fortschritt is None:
+                fortschritt = self.trainingsfortschritt
+        if ziel == "Muskelaufbau":
+            return [
+                "3x/Woche Krafttraining (Ganzkörper)",
+                "1x/Woche Ausdauer (z.B. Spinning)",
+                "Proteinreiche Ernährung"
+                ]
+        elif ziel == "Abnehmen":
+            return [
+                "2x/Woche HIIT oder Ausdauerlauf",
+                "2x/Woche Krafttraining",
+                "Kaloriendefizit, viel Gemüse"
+                ]
+        elif ziel == "Beweglichkeit":
+            return [
+                "2x/Woche Yoga oder Pilates",
+                "1x/Woche Stretching",
+                "Leichte Cardio-Einheiten"
+                ]
+        else:
+            return [
+                "2x/Woche Krafttraining",
+                "1x/Woche Ausdauer",
+                "1x/Woche Kurs nach Wahl"
+            ]
+                
+    def __init__(self, vorname, nachname, mitgliedsnummer, trainingsfortschritt=[], mitgliedschaft={}):
         self.vorname = vorname
         self.nachname = nachname
         self.mitgliedsnummer = mitgliedsnummer
