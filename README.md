@@ -14,3 +14,19 @@ Erstelle eine Python-basierte Anwendung, in der Diego, der Hirsch, ein Fitnessst
 - Fitnessberichte zu visualisieren (Fortschrittskurven der letzten Monate)
 - Klassen für Mitglieder, Kurse, Trainer und Geräte zu verwenden
 - Personalisierte Trainingspläne zu empfehlen (basierend auf Zielen und Fortschritt) *(sei hier kreativ)*
+
+## Voraussetzungen
+- Python 3.8+
+- Abhängigkeiten in `requirements.txt`
+
+## Installation
+```bash
+pip install -r requirements.txt
+```
+
+## Start
+```bash
+streamlit run main.py
+```
+
+Die Web-App ist standardmäßig unter http://localhost:8501 erreichbar.
