@@ -30,6 +30,20 @@
 - Füllen der ersten Version der Mitglied-Klassen
 - Entscheidung **streamlit** für UI zu nutzen, **Faker** für random Daten? Was für lib für Graphen?
 - Erstellung einer Klasse DeerFit, welche die Systemdaten bündelt und auch zur initialisierung genutzt werden kann
+- Erstellung der restlichen Klassen
+- Erste Login, User und Admin Seite
+- Erster Versuch Fortschritt zu modellieren
+- Initiale Datenauslese aus json-Dateien
+
+# Nächste Schritte
+
+- Anmeldung bestimmter User ermöglichen
+- Datenspeicherung
+- Bilanzen, Trainer und Equipment einbauen
+- Fortschrittsmodell verallgemeinern
+- Vorhersagemodell für nächste Kurse
+- Testing
+
 
 
 # Aufbau der bisher erstellten Klassen
