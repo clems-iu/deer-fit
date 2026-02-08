@@ -1,0 +1,22 @@
+[
+	{"name": "Yoga", "beschreibung": "Entspannender Yoga-Kurs für alle Level", "dauer": 60, "max_teilnehmer": 15, "offene_termine": []},
+	{"name": "Pilates", "beschreibung": "Ganzkörpertraining für Kraft und Flexibilität", "dauer": 50, "max_teilnehmer": 12, "offene_termine": []},
+	{"name": "Spinning", "beschreibung": "Intensives Ausdauertraining auf dem Rad", "dauer": 45, "max_teilnehmer": 20, "offene_termine": []},
+	{"name": "Zumba", "beschreibung": "Tanz und Fitness zu lateinamerikanischer Musik", "dauer": 55, "max_teilnehmer": 18, "offene_termine": []},
+	{"name": "Bodypump", "beschreibung": "Kraftausdauertraining mit Langhanteln", "dauer": 60, "max_teilnehmer": 16, "offene_termine": []},
+	{"name": "HIIT", "beschreibung": "Hochintensives Intervalltraining", "dauer": 30, "max_teilnehmer": 14, "offene_termine": []},
+	{"name": "Aqua Fitness", "beschreibung": "Fitness im Wasser für jedes Alter", "dauer": 40, "max_teilnehmer": 10, "offene_termine": []},
+	{"name": "Rückenfit", "beschreibung": "Gezieltes Training für einen starken Rücken", "dauer": 45, "max_teilnehmer": 15, "offene_termine": []},
+	{"name": "Bauch-Beine-Po", "beschreibung": "Kurs für die Problemzonen", "dauer": 50, "max_teilnehmer": 17, "offene_termine": []},
+	{"name": "Functional Training", "beschreibung": "Ganzkörper-Workout für Alltag und Sport", "dauer": 60, "max_teilnehmer": 15, "offene_termine": []},
+	{"name": "Boxen", "beschreibung": "Boxtraining für Anfänger und Fortgeschrittene", "dauer": 60, "max_teilnehmer": 12, "offene_termine": []},
+	{"name": "Crossfit", "beschreibung": "Intensives Kraft- und Ausdauertraining", "dauer": 55, "max_teilnehmer": 14, "offene_termine": []},
+	{"name": "Stretching", "beschreibung": "Dehnübungen für mehr Beweglichkeit", "dauer": 30, "max_teilnehmer": 20, "offene_termine": []},
+	{"name": "Step Aerobic", "beschreibung": "Konditionstraining mit Step-Brett", "dauer": 50, "max_teilnehmer": 18, "offene_termine": []},
+	{"name": "TRX", "beschreibung": "Schlingentraining für den ganzen Körper", "dauer": 45, "max_teilnehmer": 10, "offene_termine": []},
+	{"name": "Kinderturnen", "beschreibung": "Bewegung und Spaß für Kinder", "dauer": 40, "max_teilnehmer": 15, "offene_termine": []},
+	{"name": "Seniorenfitness", "beschreibung": "Schonendes Training für Senioren", "dauer": 45, "max_teilnehmer": 12, "offene_termine": []},
+	{"name": "Tanz-Fitness", "beschreibung": "Fitness mit modernen Tanzstilen", "dauer": 50, "max_teilnehmer": 16, "offene_termine": []},
+	{"name": "Kraftzirkel", "beschreibung": "Stationstraining für Kraft und Ausdauer", "dauer": 60, "max_teilnehmer": 14, "offene_termine": []},
+	{"name": "Outdoor Bootcamp", "beschreibung": "Training im Freien bei jedem Wetter", "dauer": 60, "max_teilnehmer": 20, "offene_termine": []}
+]

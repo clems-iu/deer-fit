@@ -1,0 +1,22 @@
+[
+	{"vorname": "Anna", "nachname": "Schmidt", "mitgliedsnummer": 1001, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Ben", "nachname": "Müller", "mitgliedsnummer": 1002, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Clara", "nachname": "Fischer", "mitgliedsnummer": 1003, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "David", "nachname": "Weber", "mitgliedsnummer": 1004, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Eva", "nachname": "Becker", "mitgliedsnummer": 1005, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Felix", "nachname": "Hoffmann", "mitgliedsnummer": 1006, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Greta", "nachname": "Koch", "mitgliedsnummer": 1007, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Hannah", "nachname": "Richter", "mitgliedsnummer": 1008, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Isabel", "nachname": "Wolf", "mitgliedsnummer": 1009, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Jonas", "nachname": "Schneider", "mitgliedsnummer": 1010, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Klara", "nachname": "Neumann", "mitgliedsnummer": 1011, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Lukas", "nachname": "Zimmermann", "mitgliedsnummer": 1012, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Mia", "nachname": "Hartmann", "mitgliedsnummer": 1013, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Noah", "nachname": "Krüger", "mitgliedsnummer": 1014, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Olivia", "nachname": "Schulz", "mitgliedsnummer": 1015, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Paul", "nachname": "Braun", "mitgliedsnummer": 1016, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Quirin", "nachname": "Klein", "mitgliedsnummer": 1017, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Rosa", "nachname": "Schröder", "mitgliedsnummer": 1018, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Simon", "nachname": "Lehmann", "mitgliedsnummer": 1019, "trainingsfortschritt": [], "mitgliedschaft": []},
+	{"vorname": "Tina", "nachname": "Schmitt", "mitgliedsnummer": 1020, "trainingsfortschritt": [], "mitgliedschaft": []}
+]
