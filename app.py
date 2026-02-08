@@ -5,3 +5,42 @@
 # Kurse sind der Ankerpunkt der Systemlogik für Mitglieder
 # Von eingeloggten Mitglied aus werden Aktionen ausgeführt wie Kursbuchungen, Trainingsfortschritte hinzufügen etc.
 # Dieses wird auch als Filter zur Anzeige der relevanten Daten genutzt
+
+
+# Streamlit App: Login und Weiterleitung
+import streamlit as st
+from gui import login, user, admin
+
+
+from klassen.deer_fit import DeerFit
+
+def main():
+    st.set_page_config(page_title="Deer-Fit Login", page_icon="🦌", layout="centered")
+    # Session State für Login und DeerFit
+    if 'logged_in' not in st.session_state:
+        st.session_state.logged_in = False
+        st.session_state.role = None
+    if 'deer_fit' not in st.session_state:
+        st.session_state.deer_fit = None
+
+    if not st.session_state.logged_in:
+        login.show_login()
+        # Nach Login initialisiere DeerFit-Objekt
+        if st.session_state.logged_in and st.session_state.deer_fit is None:
+            deer_fit = DeerFit()
+            deer_fit.lade_initialdaten()
+            st.session_state.deer_fit = deer_fit
+    else:
+        if st.session_state.deer_fit is None:
+            deer_fit = DeerFit()
+            deer_fit.lade_initialdaten()
+            st.session_state.deer_fit = deer_fit
+        if st.session_state.role == 'admin':
+            admin.show_admin(st.session_state.deer_fit)
+        elif st.session_state.role == 'user':
+            user.show_user(st.session_state.deer_fit)
+        else:
+            st.error("Ungültige Rolle. Bitte neu anmelden.")
+
+if __name__ == "__main__":
+    main()
