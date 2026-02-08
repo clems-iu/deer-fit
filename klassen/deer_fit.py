@@ -9,10 +9,25 @@ class DeerFit:
     def __init__(self):
         self.kurse = []      # Liste aller Kurse
         self.mitglieder = []  # Liste aller Mitglieder
+        self.trainer = []    # Liste aller Trainer
+        self.geraete = []    # Liste aller Geräte
         self.user = None     # Aktuell eingeloggtes Mitglied
         self.admin = False   # Admin-Status des eingeloggten Benutzers
         self.bilanz = {}    # Bilanzdaten des Deer-Fit Systems
-        
+
+    def trainer_hinzufuegen(self, trainer):
+        self.trainer.append(trainer)
+
+    def geraet_hinzufuegen(self, geraet):
+        self.geraete.append(geraet)
+
+    def trainer_auflisten(self):
+        for t in self.trainer:
+            print(t)
+
+    def geraete_auflisten(self):
+        for g in self.geraete:
+            print(g)
 
     def user_einloggen(self, mitglied, admin=False):
         self.user = mitglied
