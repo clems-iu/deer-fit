@@ -44,6 +44,7 @@
 - Bilanzen, Trainer und Equipment einbauen
 - Fortschrittsmodell verallgemeinern
 - Vorhersagemodell für nächste Kurse
+- Simultan mehrere User erlauben
 - Testing
 
 
