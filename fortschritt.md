@@ -28,12 +28,14 @@
 - Erstellen der Basisdateien
 - Füllen der ersten Version der Kurs-Klassen
 - Füllen der ersten Version der Mitglied-Klassen
-- Entscheidung **streamlit** für UI zu nutzen, **Faker** für random Daten? Was für lib für Graphen?
-- Erstellung einer Klasse DeerFit, welche die Systemdaten bündelt und auch zur initialisierung genutzt werden kann
-- Erstellung der restlichen Klassen
-- Erste Login, User und Admin Seite
-- Erster Versuch Fortschritt zu modellieren
-- Initiale Datenauslese aus json-Dateien
+- Entscheidung **streamlit** für UI zu nutzen,  Matplotlib für Graphen
+- Neu:
+	- Erstellung einer Klasse DeerFit, welche die Systemdaten bündelt und auch zur initialisierung genutzt werden kann
+	- Erstellung der noch übrigen Klassen (Bilanzen, Trainer, Equipment...)
+	- Erste Login, User und Admin Seite mit streamlit (Unterseiten und Rahmendiv erstellt, Daten größtenteils noch nicht aufbereitet)
+	- Erster Versuch Fortschritt und Vorschläge zu modellieren
+	- Initiale Datenauslese aus json-Dateien (Für Kurse und Mitglieder erstmal)
+		- Noch ergänzen um Abfrage für jedes Mal wenn Daten angefordert werden, damit konsistent
 
 # Nächste Schritte
 
@@ -42,6 +44,7 @@
 - Bilanzen, Trainer und Equipment einbauen
 - Fortschrittsmodell verallgemeinern
 - Vorhersagemodell für nächste Kurse
+- Simultan mehrere User erlauben
 - Testing
 
 
