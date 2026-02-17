@@ -1,0 +1,10 @@
+{
+    "vorname": "Anna",
+    "nachname": "Schmidt",
+    "mitgliedsnummer": 1001,
+    "mitgliedschaft": {
+        "typ": "Premium",
+        "startdatum": "2026-01-01",
+        "enddatum": "2026-12-31"
+    }
+}

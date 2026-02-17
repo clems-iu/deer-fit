@@ -9,10 +9,10 @@
 
 # Streamlit App: Login und Weiterleitung
 import streamlit as st
-from gui import login, user, admin
+from app.gui import login, user, admin
 
 
-from klassen.deer_fit import DeerFit
+from app.klassen.authenticator import Authenticator
 
 def main():
     st.set_page_config(page_title="Deer-Fit Login", page_icon="🦌", layout="centered")

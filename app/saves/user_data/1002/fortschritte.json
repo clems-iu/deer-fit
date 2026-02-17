@@ -1,0 +1,30 @@
+[
+    {
+        "datum": "2026-01-10",
+        "übung": "Bankdrücken",
+        "best": 68,
+        "einheit": "kg",
+        "reps": 8
+    },
+    {
+        "datum": "2026-01-15",
+        "übung": "Kniebeuge",
+        "best": 75,
+        "einheit": "kg",
+        "reps": 10
+    },
+    {
+        "datum": "2026-01-20",
+        "übung": "Klimmzug",
+        "best": 7,
+        "einheit": "Stück",
+        "reps": 1
+    },
+    {
+        "datum": "2026-01-25",
+        "übung": "Spinning",
+        "best": 40,
+        "einheit": "min",
+        "reps": 1
+    }
+]
