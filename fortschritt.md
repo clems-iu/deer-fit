@@ -29,22 +29,23 @@
 - Füllen der ersten Version der Kurs-Klassen
 - Füllen der ersten Version der Mitglied-Klassen
 - Entscheidung **streamlit** für UI zu nutzen,  Matplotlib für Graphen
+- Erstellung einer Klasse DeerFit, welche die Systemdaten bündelt und auch zur initialisierung genutzt werden kann
+- Erstellung der noch übrigen Klassen (Bilanzen, Trainer, Equipment...)
+- Erste Login, User und Admin Seite mit streamlit (Unterseiten und Rahmendiv erstellt, Daten größtenteils noch nicht aufbereitet)
+- Erster Versuch Fortschritt und Vorschläge zu modellieren
+- #deprecated Initiale Datenauslese aus json-Dateien (Für Kurse und Mitglieder erstmal) 
+- #deprecated Noch ergänzen um Abfrage für jedes Mal wenn Daten angefordert werden, damit konsistent 
 - Neu:
-	- Erstellung einer Klasse DeerFit, welche die Systemdaten bündelt und auch zur initialisierung genutzt werden kann
-	- Erstellung der noch übrigen Klassen (Bilanzen, Trainer, Equipment...)
-	- Erste Login, User und Admin Seite mit streamlit (Unterseiten und Rahmendiv erstellt, Daten größtenteils noch nicht aufbereitet)
-	- Erster Versuch Fortschritt und Vorschläge zu modellieren
-	- Initiale Datenauslese aus json-Dateien (Für Kurse und Mitglieder erstmal)
-		- Noch ergänzen um Abfrage für jedes Mal wenn Daten angefordert werden, damit konsistent
+	- Anmeldung bestimmter User ermöglichen
+	- Simultan mehrere User erlauben
+	- Neues Speichersystem mit Möglichkeit pro User Daten abzurufen
 
 # Nächste Schritte
 
-- Anmeldung bestimmter User ermöglichen
 - Datenspeicherung
 - Bilanzen, Trainer und Equipment einbauen
 - Fortschrittsmodell verallgemeinern
 - Vorhersagemodell für nächste Kurse
-- Simultan mehrere User erlauben
 - Testing
 
 
