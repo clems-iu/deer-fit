@@ -14,12 +14,12 @@ class Authenticator:
         # Hier könnte noch eine Passwortüberprüfung implementiert werden, z.B. durch Ergänzung der gespeicherten Userdaten um ein Passwort
         if mitgliedsnummer == "admin" and password == "admin":
             self.authenticated = True
-            self.role = "Admin"
+            self.role = "admin"
         else:
             user_data_path = os.path.join(os.path.dirname(__file__), "..", "saves", "user_data", mitgliedsnummer)
             if os.path.isdir(user_data_path):
                 self.authenticated = True
-                self.role = "User"
+                self.role = "user"
                 self.mitgliedsnummer = mitgliedsnummer
             else:
                 self.authenticated = False

@@ -1,16 +1,22 @@
 import streamlit as st
+import app.klassen.authenticator as auth
 
 def show_login():
 	st.title("🦌 Deer-Fit Login")
-	st.write("Bitte wählen Sie Ihre Rolle und melden Sie sich an.")
-	role = st.selectbox("Rolle auswählen", ["user", "admin"])
-	username = st.text_input("Benutzername")
+	mitgliedsnummer = st.text_input("Mitgliedsnummer")
 	password = st.text_input("Passwort", type="password")
 	if st.button("Login"):
-		# Dummy-Login, hier kann Authentifizierung ergänzt werden
-		if username and password:
-			st.session_state.logged_in = True
-			st.session_state.role = role
-			# DeerFit-Objekt wird in app.py initialisiert
+     
+		if mitgliedsnummer and password:
+			authenticator = auth.Authenticator()
+			authenticator.login(mitgliedsnummer, password)
+			if authenticator.authenticated:
+				st.session_state.logged_in = True
+				st.session_state.role = authenticator.role
+				st.session_state.mitgliedsnummer = authenticator.mitgliedsnummer
+				st.success(f"Erfolgreich als {authenticator.role} eingeloggt!")
+			else:
+				st.error("Ungültige Anmeldedaten. Bitte erneut versuchen.")
+
 		else:
-			st.warning("Bitte Benutzername und Passwort eingeben.")
+			st.warning("Bitte Mitgliedsnummer und Passwort eingeben.")

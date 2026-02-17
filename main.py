@@ -12,29 +12,17 @@ import streamlit as st
 from app.gui import login, user, admin
 
 
-from app.klassen.authenticator import Authenticator
-
 def main():
     st.set_page_config(page_title="Deer-Fit Login", page_icon="🦌", layout="centered")
-    # Session State für Login und DeerFit
+
     if 'logged_in' not in st.session_state:
         st.session_state.logged_in = False
         st.session_state.role = None
-    if 'deer_fit' not in st.session_state:
-        st.session_state.deer_fit = None
-
+        st.session_state.mitgliedsnummer = None
+        
     if not st.session_state.logged_in:
-        login.show_login()
-        # Nach Login initialisiere DeerFit-Objekt
-        if st.session_state.logged_in and st.session_state.deer_fit is None:
-            deer_fit = DeerFit()
-            deer_fit.lade_initialdaten()
-            st.session_state.deer_fit = deer_fit
+        login.show_login()    
     else:
-        if st.session_state.deer_fit is None:
-            deer_fit = DeerFit()
-            deer_fit.lade_initialdaten()
-            st.session_state.deer_fit = deer_fit
         if st.session_state.role == 'admin':
             admin.show_admin(st.session_state.deer_fit)
         elif st.session_state.role == 'user':
