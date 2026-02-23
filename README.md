@@ -20,6 +20,8 @@ Erstelle eine Python-basierte Anwendung, in der Diego, der Hirsch, ein Fitnessst
 - Abhängigkeiten in `requirements.txt`
 
 ## Installation
+Nach Bedarf eine lokale Environment für Installation erstellen, dann:
+
 ```bash
 pip install -r requirements.txt
 ```
