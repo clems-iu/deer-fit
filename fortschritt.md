@@ -39,6 +39,7 @@
 	- Anmeldung bestimmter User ermöglichen
 	- Simultan mehrere User erlauben
 	- Neues Speichersystem mit Möglichkeit pro User Daten abzurufen
+		- Einbindung dieses Systems in User-Ansicht
 
 # Nächste Schritte
 
