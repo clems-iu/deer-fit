@@ -24,9 +24,9 @@ def main():
         login.show_login()    
     else:
         if st.session_state.role == 'admin':
-            admin.show_admin(st.session_state.deer_fit)
+            admin.show_admin()
         elif st.session_state.role == 'user':
-            user.show_user(st.session_state.deer_fit)
+            user.show_user()
         else:
             st.error("Ungültige Rolle. Bitte neu anmelden.")
 
