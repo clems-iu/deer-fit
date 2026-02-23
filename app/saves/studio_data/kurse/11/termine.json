@@ -1,0 +1,42 @@
+[
+    {
+        "datum": "2026-02-12",
+        "uhrzeit": "14:00",
+        "kursbuchungen": [
+            {
+                "mitgliedsnummer": "12345",
+                "kurs": "Yoga",
+                "datum": "2026-02-12"
+            },
+            {
+                "mitgliedsnummer": "67890",
+                "kurs": "Yoga",
+                "datum": "2026-02-12"
+            }
+        ]
+    },
+    {
+        "datum": "2026-02-12",
+        "uhrzeit": "12:00"
+    },
+    {
+        "datum": "2026-02-12",
+        "uhrzeit": "19:00"
+    },
+    {
+        "datum": "2026-02-19",
+        "uhrzeit": "14:00"
+    },
+    {
+        "datum": "2026-02-19",
+        "uhrzeit": "12:00"
+    },
+    {
+        "datum": "2026-02-19",
+        "uhrzeit": "19:00"
+    },
+    {
+        "datum": "2026-02-21",
+        "uhrzeit": "18:00"
+    }
+]

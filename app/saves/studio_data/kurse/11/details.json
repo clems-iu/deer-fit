@@ -1,0 +1,7 @@
+{
+    "id": 11,
+    "name": "Spinning",
+    "beschreibung": "Intensives Ausdauertraining auf dem Rad",
+    "dauer": 45,
+    "max_teilnehmer": 20
+}
