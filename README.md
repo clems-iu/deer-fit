@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 ## Start
 ```bash
-streamlit run app.py
+streamlit run main.py
 ```
 
 Die Web-App ist standardmäßig unter http://localhost:8501 erreichbar.
