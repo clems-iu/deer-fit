@@ -37,8 +37,8 @@
 - #deprecated Noch ergänzen um Abfrage für jedes Mal wenn Daten angefordert werden, damit konsistent 
 - Neu:
 	- Anmeldung bestimmter User ermöglichen
-	- Simultan mehrere User erlauben
 	- Neues Speichersystem mit Möglichkeit pro User Daten abzurufen
+		- Einbindung dieses Systems in User-Ansicht
 
 # Nächste Schritte
 
@@ -47,6 +47,7 @@
 - Fortschrittsmodell verallgemeinern
 - Vorhersagemodell für nächste Kurse
 - Testing
+- Anpassung an thematischen Kontext
 
 
 
