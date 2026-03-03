@@ -1,5 +1,6 @@
 # Enthält die Klassen für Mitglieder, Trainingsfortschritte und Mitgliedschaften im Deer-Fit System.
 
+
 class Mitglied:
     def trainingsplan_empfehlung(self, ziel="Allgemein", fortschritt=None):
         # Kreative, einfache Logik für Trainingsplan-Empfehlung
@@ -29,6 +30,8 @@ class Mitglied:
                 "1x/Woche Ausdauer",
                 "1x/Woche Kurs nach Wahl"
             ]
+        
+    # Selectbox mit den Trainingszielen: Allgemein, Muskelaufbau, Abnehmen, Beweglichkeit -> 
                 
     def __init__(self, vorname, nachname, mitgliedsnummer, trainingsfortschritt=[], mitgliedschaft={}):
         self.vorname = vorname
