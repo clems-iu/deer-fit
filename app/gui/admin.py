@@ -1,9 +1,11 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+from app.klassen.dataLoader import DataLoader
+from app.klassen.dataSaver import DataSaver
 
 
-def show_admin(deer_fit):
+def show_admin():
 	st.markdown("""
 		<style>
 		.main-title {font-size:2.5em; font-weight:bold; color:#2E8B57; margin-bottom:0.2em;}
@@ -14,53 +16,107 @@ def show_admin(deer_fit):
 	""", unsafe_allow_html=True)
 
 	st.markdown('<div class="main-title">🛠️ Deer-Fit Adminbereich</div>', unsafe_allow_html=True)
-	st.info("Willkommen im modernen Admin-Bereich! Verwalten Sie Mitglieder, Kurse und mehr.")
+	st.info("Willkommen im Admin-Bereich! Verwalten Sie Mitglieder, Kurse und mehr.")
 
 	st.markdown('<div class="subtitle">👥 Mitglieder Übersicht</div>', unsafe_allow_html=True)
-	if deer_fit:
+	dl = DataLoader()
+	ds = DataSaver()
+	userliste = dl.get_all_users()
+	if userliste:
 		cols = st.columns(2)
-		for idx, mitglied in enumerate(deer_fit.mitglieder):
+		for idx, mitglied in enumerate(userliste):
 			with cols[idx % 2]:
 				st.markdown(f"<div class='mitglied-card'>"
-							f"<b>{mitglied.vorname} {mitglied.nachname}</b> <span style='color:#888'>(#{mitglied.mitgliedsnummer})</span><br>"
-							f"<span style='font-size:0.95em;'>Mitgliedschaft: <b>{mitglied.mitgliedschaft.get('typ','-')}</b> bis {mitglied.mitgliedschaft.get('enddatum','-')}</span>"
+							f"<b style='color:#2E8B57;'>{mitglied.vorname} {mitglied.nachname}</b> <span style='color:#888'>(#{mitglied.mitgliedsnummer})</span><br>"
+							f"<span style='font-size:0.95em;color:#2E8B57'>Mitgliedschaft: <b>{mitglied.mitgliedschaft.get('typ','-')}</b> bis {mitglied.mitgliedschaft.get('enddatum','-')}</span>"
 							f"</div>", unsafe_allow_html=True)
 
-	st.markdown('<div class="subtitle">📈 Fortschritt aller Mitglieder</div>', unsafe_allow_html=True)
-	if deer_fit:
-		for mitglied in deer_fit.mitglieder:
-			fortschritt = mitglied.trainingsfortschritt
-			if fortschritt:
-				daten = []
-				for eintrag in fortschritt:
-					if isinstance(eintrag, dict):
-						daten.append({"Datum": eintrag.get("datum"), "Übung": eintrag.get("übung"), "Max": eintrag.get("max")})
-					else:
-						daten.append({"Datum": getattr(eintrag, "datum", None), "Übung": getattr(eintrag, "übung", None), "Max": getattr(eintrag, "max", None)})
-				df = pd.DataFrame(daten)
-				if not df.empty:
-					st.markdown(f"<b>{mitglied.vorname} {mitglied.nachname}</b>", unsafe_allow_html=True)
-					for uebung in df["Übung"].unique():
-						st.markdown(f"<span style='color:#2E8B57;font-style:italic;'>{uebung}</span>", unsafe_allow_html=True)
-						df_uebung = df[df["Übung"] == uebung]
-						fig, ax = plt.subplots()
-						ax.plot(df_uebung["Datum"], df_uebung["Max"], marker="o", color="#2E8B57")
-						ax.set_xlabel("Datum")
-						ax.set_ylabel("Bester Wert")
-						ax.set_title(f"Fortschritt: {uebung}")
-						ax.grid(True, linestyle=":", alpha=0.5)
-						st.pyplot(fig)
+	# --- Neues Mitglied anlegen ---
+	with st.expander("➕ Neues Mitglied anlegen", expanded=False):
+		with st.form("add_user_form"):
+			vorname = st.text_input("Vorname")
+			nachname = st.text_input("Nachname")
+			mitgliedsnummer = st.text_input("Mitgliedsnummer (z.B. 1003)")
+			mitgliedschaft_typ = st.selectbox("Mitgliedschafts-Typ", ["Basis", "Premium", "Flexibel"])
+			startdatum = st.date_input("Startdatum", format="YYYY-MM-DD")
+			enddatum = st.date_input("Enddatum", format="YYYY-MM-DD")
+			submitted = st.form_submit_button("Mitglied anlegen")
+			if submitted:
+				user_data = {
+					"vorname": vorname,
+					"nachname": nachname,
+					"mitgliedsnummer": mitgliedsnummer,
+					"mitgliedschaft": {
+						"typ": mitgliedschaft_typ,
+						"startdatum": str(startdatum),
+						"enddatum": str(enddatum)
+					}
+				}
+				if ds.save_user(user_data):
+					st.success(f"Mitglied {vorname} {nachname} wurde angelegt.")
+				else:
+					st.error("Fehler beim Anlegen des Mitglieds.")
+
+	# st.markdown('<div class="subtitle">📈 Fortschritt aller Mitglieder</div>', unsafe_allow_html=True)
+	# if deer_fit:
+	# 	for mitglied in deer_fit.mitglieder:
+	# 		fortschritt = mitglied.trainingsfortschritt
+	# 		if fortschritt:
+	# 			daten = []
+	# 			for eintrag in fortschritt:
+	# 				if isinstance(eintrag, dict):
+	# 					daten.append({"Datum": eintrag.get("datum"), "Übung": eintrag.get("übung"), "Max": eintrag.get("max")})
+	# 				else:
+	# 					daten.append({"Datum": getattr(eintrag, "datum", None), "Übung": getattr(eintrag, "übung", None), "Max": getattr(eintrag, "max", None)})
+	# 			df = pd.DataFrame(daten)
+	# 			if not df.empty:
+	# 				st.markdown(f"<b>{mitglied.vorname} {mitglied.nachname}</b>", unsafe_allow_html=True)
+	# 				for uebung in df["Übung"].unique():
+	# 					st.markdown(f"<span style='color:#2E8B57;font-style:italic;'>{uebung}</span>", unsafe_allow_html=True)
+	# 					df_uebung = df[df["Übung"] == uebung]
+	# 					fig, ax = plt.subplots()
+	# 					ax.plot(df_uebung["Datum"], df_uebung["Max"], marker="o", color="#2E8B57")
+	# 					ax.set_xlabel("Datum")
+	# 					ax.set_ylabel("Bester Wert")
+	# 					ax.set_title(f"Fortschritt: {uebung}")
+	# 					ax.grid(True, linestyle=":", alpha=0.5)
+	# 					st.pyplot(fig)
 
 	st.markdown('<div class="subtitle">🏋️ Kurse Übersicht</div>', unsafe_allow_html=True)
-	if deer_fit:
+	kursliste = dl.load_all_courses()
+	if kursliste:
 		kurs_cols = st.columns(2)
-		for idx, kurs in enumerate(deer_fit.kurse):
+		for idx, kurs in enumerate(kursliste):
 			with kurs_cols[idx % 2]:
 				st.markdown(f"<div class='kurs-card'>"
-							f"<b>{kurs.name}</b><br>"
-							f"<span style='font-size:0.95em;'>{kurs.beschreibung}</span><br>"
-							f"<span style='color:#888'>Dauer: {kurs.dauer} min | max {kurs.max_teilnehmer} TN</span>"
+							f"<b style='color:#2E8B57;'>{kurs.get('name')}</b><br>"
+							f"<span style='font-size:0.95em; color:#2E8B57;''>{kurs.get('beschreibung')}</span><br>"
+							f"<span style='color:#888'>Dauer: {kurs.get('dauer')} min | max {kurs.get('max_teilnehmer')} TN</span>"
 							f"</div>", unsafe_allow_html=True)
+
+	# --- Neuen Kurs anlegen ---
+	with st.expander("➕ Neuen Kurs anlegen", expanded=False):
+		with st.form("add_course_form"):
+			kurs_id = st.text_input("Kurs-ID (z.B. 12)")
+			kurs_name = st.text_input("Kursname")
+			beschreibung = st.text_area("Beschreibung")
+			schwierigkeitsgrad = st.selectbox("Schwierigkeitsgrad", ["Einfach", "Mittel", "Schwer"])
+			dauer = st.number_input("Dauer (Minuten)", min_value=1, max_value=300, value=60)
+			max_teilnehmer = st.number_input("Max. Teilnehmer", min_value=1, max_value=100, value=10)
+			submitted_kurs = st.form_submit_button("Kurs anlegen")
+			if submitted_kurs:
+				kurs_data = {
+					"id": kurs_id,
+					"name": kurs_name,
+					"beschreibung": beschreibung,
+					"schwierigkeitsgrad": schwierigkeitsgrad,
+					"dauer": dauer,
+					"max_teilnehmer": max_teilnehmer
+				}
+				if ds.save_course(kurs_data):
+					st.success(f"Kurs {kurs_name} wurde angelegt.")
+				else:
+					st.error("Fehler beim Anlegen des Kurses.")
 
 	st.markdown('<div class="subtitle">💶 Finanzübersicht</div>', unsafe_allow_html=True)
 	st.info("Finanzdaten-Integration möglich, sobald Finanzverwaltung angebunden ist.")
