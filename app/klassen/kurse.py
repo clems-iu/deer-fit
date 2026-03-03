@@ -1,12 +1,13 @@
 #Enthält die Klassen für Kurse, Kurstermine Kursbuchungen und Kurspläne im Deer-Fit System.
 
 class Kurs:
-    def __init__(self, id, name, beschreibung, dauer, max_teilnehmer=10):
+    def __init__(self, id, name, beschreibung, dauer, max_teilnehmer=10, schwierigkeitsgrad="Mittel"):
         self.id = id
         self.name = name
         self.beschreibung = beschreibung
         self.dauer = dauer  # Dauer in Minuten
         self.max_teilnehmer = max_teilnehmer  # Maximale Teilnehmeranzahl
+        self.schwierigkeitsgrad = schwierigkeitsgrad  # z.B. "Einfach", "Mittel", "Schwer"
         
     def __str__(self):
         return f"{self.name}: {self.beschreibung} ({self.dauer} Minuten)"

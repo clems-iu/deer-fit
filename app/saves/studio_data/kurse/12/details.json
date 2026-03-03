@@ -1,0 +1,8 @@
+{
+    "id": "12",
+    "name": "Bjj - Beginner",
+    "beschreibung": "Beginner Kurs für Einsteiger in Brazilian Jiu-Jitsu",
+    "schwierigkeitsgrad": "Einfach",
+    "dauer": 75,
+    "max_teilnehmer": 15
+}
