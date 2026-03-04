@@ -1,4 +1,4 @@
-#Enthält die Klassen für Kurse, Kurstermine Kursbuchungen und Kurspläne im Deer-Fit System.
+#Enthält die Klassen für Kurse, Kurstermine und Kurspläne im Deer-Fit System.
 
 class Kurs:
     def __init__(self, id, name, beschreibung, dauer, max_teilnehmer=10, schwierigkeitsgrad="Mittel"):
@@ -13,7 +13,8 @@ class Kurs:
         return f"{self.name}: {self.beschreibung} ({self.dauer} Minuten)"
 
 class Kurstermin:
-    def __init__(self, kurs, datum, uhrzeit):
+    def __init__(self, id, kurs, datum, uhrzeit):
+        self.id = id
         self.kurs = kurs
         self.datum = datum  # Datum des Kurstermins
         self.uhrzeit = uhrzeit  # Uhrzeit des Kurstermins
