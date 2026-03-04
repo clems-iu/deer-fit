@@ -61,5 +61,12 @@
         "best": 60,
         "einheit": "kg",
         "reps": 10
+    },
+    {
+        "datum": "2026-03-03",
+        "übung": "Bankdrücken",
+        "best": 60.0,
+        "einheit": "kg",
+        "reps": 6
     }
 ]

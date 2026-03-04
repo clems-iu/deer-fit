@@ -4,14 +4,10 @@
         "uhrzeit": "14:00",
         "kursbuchungen": [
             {
-                "mitgliedsnummer": "12345",
-                "kurs": "Yoga",
-                "datum": "2026-02-12"
+                "mitgliedsnummer": "12345"
             },
             {
-                "mitgliedsnummer": "67890",
-                "kurs": "Yoga",
-                "datum": "2026-02-12"
+                "mitgliedsnummer": "67890"
             }
         ]
     },
