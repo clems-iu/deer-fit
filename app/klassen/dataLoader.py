@@ -2,6 +2,7 @@ import json
 import logging
 from pathlib import Path
 from typing import Any, List
+from app.klassen.mitglieder import Mitglied
 
 class DataLoader:
     def __init__(self, saves_path: str = "app/saves"):
@@ -87,7 +88,7 @@ class DataLoader:
             self.logger.error(f"Error loading user data from {file_path}: {e}", exc_info=True)
         return []
     
-    def get_all_users(self) -> List[str]:
+    def get_all_userIds(self) -> List[str]:
         """Gibt Liste aller User-IDs zurück"""
         user_dir = self.saves_path / "user_data"
         try:
@@ -96,4 +97,54 @@ class DataLoader:
             return users
         except Exception as e:
             self.logger.error(f"Error getting all users from {user_dir}: {e}", exc_info=True)
+        return []
+    
+    def get_all_users(self) -> List['Mitglied']:
+        """Gibt Liste aller User als Mitglied-Objekte zurück"""
+        user_dir = self.saves_path / "user_data"
+        users = []
+        try:
+            for user_folder in user_dir.iterdir():
+                if user_folder.is_dir():
+                    user_data = self.load_user_data(user_folder.name, "user")
+                    if user_data:
+                        mitglied = Mitglied(
+                            vorname=user_data.get("vorname", ""),
+                            nachname=user_data.get("nachname", ""),
+                            mitgliedsnummer=user_folder.name,
+                            trainingsfortschritt=user_data.get("trainingsfortschritt", []),
+                            mitgliedschaft=user_data.get("mitgliedschaft", {})
+                        )
+                        users.append(mitglied)
+            self.logger.info(f"Found {len(users)} users in {user_dir}")
+            return users
+        except Exception as e:
+            self.logger.error(f"Error getting all users from {user_dir}: {e}", exc_info=True)
+        return []
+    
+    #Enthält noch nicht die richtige Speicherlogik, da die Datenstruktur der Buchungen noch nicht final ist.
+    def load_all_bookings (self) -> List[dict]:
+        """Lädt alle Kursbuchungen"""
+        userlist = self.get_all_users()
+        all_bookings = []
+        for user_id in userlist:
+            bookings = self.load_user_data(user_id, "buchungen")
+            if isinstance(bookings, list):
+                for booking in bookings:
+                    booking["mitgliedsnummer"] = user_id
+                    all_bookings.append(booking)
+
+    def load_equipment(self) -> List[dict]:
+        """Lädt alle Equipment-Daten aus der equipment.json Datei"""
+        file_path = self.saves_path / "studio_data" / "equipment.json"
+        try:
+            if file_path.exists():
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    self.logger.info(f"Loaded equipment data from {file_path}")
+                    return data
+            else:
+                self.logger.warning(f"File not found: {file_path}")
+        except Exception as e:
+            self.logger.error(f"Error loading equipment data from {file_path}: {e}", exc_info=True)
         return []
