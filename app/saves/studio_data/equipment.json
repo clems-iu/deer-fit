@@ -26,5 +26,12 @@
         "anschaffungsjahr": 2023,
         "kosten": 10,
         "sindKostenWiederkehrend": true
+    },
+    {
+        "id": "1511f37a-13f1-43f4-a81c-ffe711ac4cbd",
+        "name": "Langhantel",
+        "anschaffungsjahr": 2026,
+        "kosten": 700,
+        "sindKostenWiederkehrend": false
     }
 ]

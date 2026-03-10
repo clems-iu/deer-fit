@@ -6,6 +6,9 @@ from app.klassen.dataSaver import DataSaver
 
 
 def show_admin():
+	dl = DataLoader()
+	ds = DataSaver()
+	
 	st.markdown("""
 		<style>
 		.main-title {font-size:2.5em; font-weight:bold; color:#2E8B57; margin-bottom:0.2em;}
@@ -19,8 +22,6 @@ def show_admin():
 	st.info("Willkommen im Admin-Bereich! Verwalten Sie Mitglieder, Kurse und mehr.")
 
 	st.markdown('<div class="subtitle">👥 Mitglieder Übersicht</div>', unsafe_allow_html=True)
-	dl = DataLoader()
-	ds = DataSaver()
 	userliste = dl.get_all_users()
 	if userliste:
 		cols = st.columns(2)
@@ -117,6 +118,90 @@ def show_admin():
 					st.success(f"Kurs {kurs_name} wurde angelegt.")
 				else:
 					st.error("Fehler beim Anlegen des Kurses.")
+
+
+	# --- Equipment Übersicht & Hinzufügen ---
+	st.markdown('<div class="subtitle">🛠️ Equipment Übersicht</div>', unsafe_allow_html=True)
+	equipment_liste = dl.load_equipment()
+	if equipment_liste:
+		for eq in equipment_liste:
+			st.markdown(f"<div class='mitglied-card'>"
+						f"<b style='color:#2E8B57;'>{eq.get('name')}</b> <span style='color:#888'>(#{eq.get('id','-')})</span><br>"
+						f"<span style='font-size:0.95em;color:#2E8B57'>Anschaffung: <b>{eq.get('anschaffungsjahr','-')}</b> | Kosten: {eq.get('kosten','-')} EUR | Wiederkehrend: {eq.get('sindKostenWiederkehrend', False)}</span>"
+						f"</div>", unsafe_allow_html=True)
+
+	with st.expander("➕ Neues Equipment hinzufügen", expanded=False):
+		with st.form("add_equipment_form"):
+			eq_name = st.text_input("Name")
+			eq_jahr = st.number_input("Anschaffungsjahr", min_value=2000, max_value=2100, value=2024)
+			eq_kosten = st.number_input("Kosten (EUR)", min_value=0, value=0)
+			eq_wiederkehrend = st.checkbox("Kosten wiederkehrend?", value=False)
+			submitted_eq = st.form_submit_button("Equipment anlegen")
+			if submitted_eq:
+				import uuid
+				eq_data = {
+					"id": str(uuid.uuid4()),
+					"name": eq_name,
+					"anschaffungsjahr": eq_jahr,
+					"kosten": eq_kosten,
+					"sindKostenWiederkehrend": eq_wiederkehrend
+				}
+				if ds.save_equipment(eq_data):
+					st.success(f"Equipment {eq_name} wurde angelegt.")
+				else:
+					st.error("Fehler beim Anlegen des Equipments.")
+
+	# --- Kalender für Kurstermine ---
+	st.markdown('<div class="subtitle">📅 Kurs-Termine Kalender</div>', unsafe_allow_html=True)
+	from streamlit_calendar import calendar
+	# Alle Termine aus allen Kursen sammeln
+	all_courses = dl.load_all_courses()
+	all_events = []
+	for kurs in all_courses:
+		termine = dl.load_course_dates(str(kurs.get('id')))
+		for termin in termine:
+			all_events.append({
+				"id": f"{kurs.get('id')}-{termin.get('id')}",
+				"title": f"{kurs.get('name')} ({termin.get('uhrzeit')})",
+				"start": f"{termin.get('datum')}T{termin.get('uhrzeit')}:00",
+				"end": f"{termin.get('datum')}T{termin.get('uhrzeit')}:00",
+				"extendedProps": {"kurs_id": kurs.get('id'), "termin_id": termin.get('id')}
+			})
+
+	calendar_options = {
+		"initialView": "dayGridMonth",
+		"locale": "de",
+		"headerToolbar": {"left": "prev,next today", "center": "title", "right": "dayGridMonth,timeGridWeek,timeGridDay"},
+		"editable": False,
+		"selectable": True,
+		"height": 600
+	}
+	cal_return = calendar(
+		events=all_events,
+		options=calendar_options,
+		custom_css=".fc .fc-toolbar-title { color: #2E8B57; }"
+	)
+
+	with st.expander("➕ Neuen Kurstermin hinzufügen", expanded=False):
+		with st.form("add_termin_form"):
+			kurs_ids = [str(k.get('id')) for k in all_courses]
+			kurs_id = st.selectbox("Kurs-ID", kurs_ids)
+			datum = st.date_input("Datum", format="YYYY-MM-DD")
+			uhrzeit = st.text_input("Uhrzeit (z.B. 18:00)")
+			submitted_termin = st.form_submit_button("Termin anlegen")
+			if submitted_termin:
+				# Termin speichern
+				# Hole aktuelle Termine
+				termine = dl.load_course_dates(kurs_id)
+				# Neue ID generieren
+				new_id = max([t.get('id', 0) for t in termine], default=0) + 1
+				new_termin = {"id": new_id, "datum": str(datum), "uhrzeit": uhrzeit, "kursbuchungen": []}
+				termine.append(new_termin)
+				# Speichern
+				if ds.save_course_dates(kurs_id, termine):
+					st.success(f"Termin für Kurs {kurs_id} am {datum} um {uhrzeit} wurde angelegt.")
+				else:
+					st.error("Fehler beim Anlegen des Termins.")
 
 	st.markdown('<div class="subtitle">💶 Finanzübersicht</div>', unsafe_allow_html=True)
 	st.info("Finanzdaten-Integration möglich, sobald Finanzverwaltung angebunden ist.")

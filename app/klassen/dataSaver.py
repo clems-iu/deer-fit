@@ -9,6 +9,20 @@ class DataSaver:
 		self.logger = logging.getLogger(self.__class__.__name__)
 		if not logging.getLogger().hasHandlers():
 			logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
+			
+	def save_course_dates(self, course_id: str, termine: list) -> bool:
+		"""Speichert die Terminliste für einen Kurs (überschreibt die termine.json)"""
+		file_path = self.saves_path / "studio_data" / "kurse" / str(course_id) / "termine.json"
+		try:
+			file_path.parent.mkdir(parents=True, exist_ok=True)
+			with open(file_path, 'w', encoding='utf-8') as f:
+				json.dump(termine, f, ensure_ascii=False, indent=4)
+			self.logger.info(f"Saved course dates for course {course_id} to {file_path}")
+			return True
+		except Exception as e:
+			self.logger.error(f"Error saving course dates for course {course_id} to {file_path}: {e}", exc_info=True)
+			return False
+	
 	
 	def add_bilanz_data(self, betrag: str, beschreibung: str) -> bool:
 		"""Fügt Bilanz-Daten hinzu"""
