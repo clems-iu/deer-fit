@@ -13,12 +13,12 @@ class Kurs:
         return f"{self.name}: {self.beschreibung} ({self.dauer} Minuten)"
 
 class Kurstermin:
-    def __init__(self, id, kurs, datum, uhrzeit):
+    def __init__(self, id, kurs, datum, uhrzeit, kursbuchungen=[]):
         self.id = id
         self.kurs = kurs
         self.datum = datum  # Datum des Kurstermins
         self.uhrzeit = uhrzeit  # Uhrzeit des Kurstermins
-        self.kursbuchungen = []  # Liste der angemeldeten Mitglieder als Mitgliedsnummern
+        self.kursbuchungen = kursbuchungen  # Liste der angemeldeten Mitglieder als Mitgliedsnummern
 
     def teilnehmer_hinzufuegen(self, mitgliedsnummer):
         if len(self.kursbuchungen) < self.kurs.max_teilnehmer:
