@@ -13,7 +13,7 @@ from app.gui import login, user, admin
 
 
 def main():
-    st.set_page_config(page_title="Deer-Fit", page_icon="🦌", layout="centered")
+    st.set_page_config(page_title="Deer-Fit", page_icon="🦌", layout="wide")
 
     if 'logged_in' not in st.session_state:
         st.session_state.logged_in = False
