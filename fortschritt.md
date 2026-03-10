@@ -35,13 +35,20 @@
 - Erster Versuch Fortschritt und Vorschläge zu modellieren
 - #deprecated Initiale Datenauslese aus json-Dateien (Für Kurse und Mitglieder erstmal) 
 - #deprecated Noch ergänzen um Abfrage für jedes Mal wenn Daten angefordert werden, damit konsistent 
-- Neu:
-	- Anmeldung bestimmter User ermöglichen
-	- Neues Speichersystem mit Möglichkeit pro User Daten abzurufen
-		- Einbindung dieses Systems in User-Ansicht
+- Anmeldung bestimmter User ermöglichen
+- Neues Speichersystem mit Möglichkeit pro User Daten abzurufen
+- Einbindung dieses Systems in User-Ansicht
+
+- Admin Sicht eingebunden
+- Datenspeicherung an einigen Stellen eingebunden
+- Formulare für Kurs, User, Buchung und Fortschritterstellung hinugefügt
+- Trainingsfortschritt Darstellung verbessert
 
 # Nächste Schritte
 
+- kurstermine hinzufügen, sowie trainer und equipment
+- ids für kurse und user generieren
+- fixen der kursbuchung
 - Datenspeicherung
 - Bilanzen, Trainer und Equipment einbauen
 - Fortschrittsmodell verallgemeinern

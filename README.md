@@ -1,7 +1,7 @@
 # Aufgabe 8: DeerFit – Das Fitnessstudio des Hirsches
 
 ## Idee
-Wie kann ein Hirsch Python nutzen, um ein modernes Fitnessstudio für Waldtiere zu betreiben?
+Ein Streamlit GUI mit einer Admin- und Mitglieder-Ansicht zur Verwaltung eines Fitnessstudios, dessen Daten objektorientiert verwaltet und in json-Dateien gespeichert werden. 
 
 ## Aufgabe
 Erstelle eine Python-basierte Anwendung, in der Diego, der Hirsch, ein Fitnessstudio auf der Waldlichtung eröffnet und Code verwendet, um:
