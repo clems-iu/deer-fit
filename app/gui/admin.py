@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from app.klassen.dataLoader import DataLoader
 from app.klassen.dataSaver import DataSaver
+from app.klassen.mitglieder import Mitglied
+from app.klassen.kurse import Kurs, Kurstermin
 
 
 def show_admin():
@@ -37,22 +39,21 @@ def show_admin():
 		with st.form("add_user_form"):
 			vorname = st.text_input("Vorname")
 			nachname = st.text_input("Nachname")
-			mitgliedsnummer = st.text_input("Mitgliedsnummer (z.B. 1003)")
 			mitgliedschaft_typ = st.selectbox("Mitgliedschafts-Typ", ["Basis", "Premium", "Flexibel"])
 			startdatum = st.date_input("Startdatum", format="YYYY-MM-DD")
 			enddatum = st.date_input("Enddatum", format="YYYY-MM-DD")
 			submitted = st.form_submit_button("Mitglied anlegen")
 			if submitted:
-				user_data = {
-					"vorname": vorname,
-					"nachname": nachname,
-					"mitgliedsnummer": mitgliedsnummer,
-					"mitgliedschaft": {
+				user_data = Mitglied(
+					vorname,
+					nachname,
+					[],
+					{
 						"typ": mitgliedschaft_typ,
 						"startdatum": str(startdatum),
 						"enddatum": str(enddatum)
 					}
-				}
+				)
 				if ds.save_user(user_data):
 					st.success(f"Mitglied {vorname} {nachname} wurde angelegt.")
 				else:
@@ -98,7 +99,6 @@ def show_admin():
 	# --- Neuen Kurs anlegen ---
 	with st.expander("➕ Neuen Kurs anlegen", expanded=False):
 		with st.form("add_course_form"):
-			kurs_id = st.text_input("Kurs-ID (z.B. 12)")
 			kurs_name = st.text_input("Kursname")
 			beschreibung = st.text_area("Beschreibung")
 			schwierigkeitsgrad = st.selectbox("Schwierigkeitsgrad", ["Einfach", "Mittel", "Schwer"])
@@ -106,14 +106,7 @@ def show_admin():
 			max_teilnehmer = st.number_input("Max. Teilnehmer", min_value=1, max_value=100, value=10)
 			submitted_kurs = st.form_submit_button("Kurs anlegen")
 			if submitted_kurs:
-				kurs_data = {
-					"id": kurs_id,
-					"name": kurs_name,
-					"beschreibung": beschreibung,
-					"schwierigkeitsgrad": schwierigkeitsgrad,
-					"dauer": dauer,
-					"max_teilnehmer": max_teilnehmer
-				}
+				kurs_data = Kurs(kurs_name, beschreibung, dauer, max_teilnehmer, schwierigkeitsgrad)
 				if ds.save_course(kurs_data):
 					st.success(f"Kurs {kurs_name} wurde angelegt.")
 				else:
@@ -184,14 +177,15 @@ def show_admin():
 
 	with st.expander("➕ Neuen Kurstermin hinzufügen", expanded=False):
 		with st.form("add_termin_form"):
-			kurs_ids = [str(k.get('id')) for k in all_courses]
-			kurs_id = st.selectbox("Kurs-ID", kurs_ids)
+			kurs_names = [str(k.get('name')) for k in all_courses]
+			kurs_name = st.selectbox("Kurs", kurs_names)
 			datum = st.date_input("Datum", format="YYYY-MM-DD")
 			uhrzeit = st.text_input("Uhrzeit (z.B. 18:00)")
 			submitted_termin = st.form_submit_button("Termin anlegen")
 			if submitted_termin:
 				# Termin speichern
 				# Hole aktuelle Termine
+				kurs_id = all_courses[kurs_names.index(kurs_name)].get('id')
 				termine = dl.load_course_dates(kurs_id)
 				# Neue ID generieren
 				new_id = max([t.get('id', 0) for t in termine], default=0) + 1

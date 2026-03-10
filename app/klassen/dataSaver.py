@@ -2,6 +2,8 @@ import json
 import logging
 from pathlib import Path
 from typing import Any, List
+from app.klassen.mitglieder import Mitglied
+from app.klassen.kurse import Kurs, Kurstermin
 
 class DataSaver:
 	def __init__(self, saves_path: str = "app/saves"):
@@ -44,28 +46,28 @@ class DataSaver:
 			self.logger.error(f"Error adding bilanz data to {file_path}: {e}", exc_info=True)
 			return False
 
-	def save_user(self, user_data: dict) -> bool:
+	def save_user(self, user_data: Mitglied) -> bool:
 		"""Speichert einen neuen User im user_data-Ordner"""
-		user_id = str(user_data.get("mitgliedsnummer"))
+		user_id = str(user_data.mitgliedsnummer)
 		file_path = self.saves_path / "user_data" / user_id / "user.json"
 		try:
 			file_path.parent.mkdir(parents=True, exist_ok=True)
 			with open(file_path, 'w', encoding='utf-8') as f:
-				json.dump(user_data, f, ensure_ascii=False, indent=4)
+				json.dump(user_data.__dict__, f, ensure_ascii=False, indent=4)
 			self.logger.info(f"Saved user data for user {user_id} to {file_path}")
 			return True
 		except Exception as e:
 			self.logger.error(f"Error saving user data for user {user_id} to {file_path}: {e}", exc_info=True)
 			return False
 
-	def save_course(self, course_data: dict) -> bool:
+	def save_course(self, course_data: Kurs) -> bool:
 		"""Speichert einen neuen Kurs im kurse-Ordner"""
-		course_id = str(course_data.get("id"))
+		course_id = str(course_data.id)
 		file_path = self.saves_path / "studio_data" / "kurse" / course_id / "details.json"
 		try:
 			file_path.parent.mkdir(parents=True, exist_ok=True)
 			with open(file_path, 'w', encoding='utf-8') as f:
-				json.dump(course_data, f, ensure_ascii=False, indent=4)
+				json.dump(course_data.__dict__, f, ensure_ascii=False, indent=4)
 			self.logger.info(f"Saved course data for course {course_id} to {file_path}")
 			return True
 		except Exception as e:
