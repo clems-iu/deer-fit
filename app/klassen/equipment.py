@@ -1,11 +1,15 @@
-# Enthält die Klasse für Geräte im Deer-Fit System
+# Enthält die Klasse für Geräte und Trainer im Deer-Fit System, dadurch, dass die Kosten wiederkehrend sein können, 
+# wird die Klasse Equipment erweitert, um gemietete Geräte oder Trainer zu unterstützen.
+import uuid
 
-class Geraet:
-	def __init__(self, name, anschaffungsjahr, kosten, status="verfügbar"):
+class Equipment:
+	def __init__(self, name, anschaffungsjahr, kosten, sindKostenWiederkehrend=False):
+		self.id = uuid.uuid4()  # Generiert eine eindeutige ID für jedes Equipment
 		self.name = name
 		self.anschaffungsjahr = anschaffungsjahr
 		self.kosten = kosten
-		self.status = status
+		self.sindKostenWiederkehrend = sindKostenWiederkehrend  # Standardmäßig auf False gesetzt
+		
 
 	def __str__(self):
-		return f"Gerät: {self.name} (Anschaffung: {self.anschaffungsjahr}, Kosten: {self.kosten} EUR, Status: {self.status})"
+		return f"Equipment: {self.name} (Anschaffung: {self.anschaffungsjahr}, Kosten: {self.kosten} EUR, Wiederkehrend: {self.sindKostenWiederkehrend})"
