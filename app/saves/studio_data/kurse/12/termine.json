@@ -56,5 +56,11 @@
         "datum": "2026-02-21",
         "uhrzeit": "18:00",
         "kursbuchungen": []
+    },
+    {
+        "id": 8,
+        "datum": "2026-03-10",
+        "uhrzeit": "16:00",
+        "kursbuchungen": []
     }
 ]

@@ -1,0 +1,11 @@
+{
+    "vorname": "Patrick",
+    "nachname": "Gazelle",
+    "mitgliedsnummer": "951781bb-ba34-4b5d-82f9-96e11cb94181",
+    "trainingsfortschritt": [],
+    "mitgliedschaft": {
+        "typ": "Basis",
+        "startdatum": "2026-03-10",
+        "enddatum": "2028-03-24"
+    }
+}

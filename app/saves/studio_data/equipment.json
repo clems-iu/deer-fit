@@ -33,5 +33,12 @@
         "anschaffungsjahr": 2026,
         "kosten": 700,
         "sindKostenWiederkehrend": false
+    },
+    {
+        "id": "18553a18-e4e4-4bd3-8a53-3c7b4745f888",
+        "name": "Boxsack",
+        "anschaffungsjahr": 2026,
+        "kosten": 200,
+        "sindKostenWiederkehrend": false
     }
 ]

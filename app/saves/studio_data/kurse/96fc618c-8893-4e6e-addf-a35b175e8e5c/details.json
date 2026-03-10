@@ -1,0 +1,8 @@
+{
+    "id": "96fc618c-8893-4e6e-addf-a35b175e8e5c",
+    "name": "Bjj - Mixed Level",
+    "beschreibung": "Kurs für erfahrenere Gym-Mitglieder",
+    "dauer": 60,
+    "max_teilnehmer": 10,
+    "schwierigkeitsgrad": "Mittel"
+}

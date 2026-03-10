@@ -3,7 +3,10 @@
         "id": 1,
         "datum": "2026-02-12",
         "uhrzeit": "14:00",
-        "kursbuchungen": [ "12345", "67890" ]
+        "kursbuchungen": [
+            "12345",
+            "67890"
+        ]
     },
     {
         "id": 2,
@@ -51,6 +54,18 @@
         "id": 7,
         "datum": "2026-02-21",
         "uhrzeit": "18:00",
+        "kursbuchungen": []
+    },
+    {
+        "id": 8,
+        "datum": "2026-03-10",
+        "uhrzeit": "17:00",
+        "kursbuchungen": []
+    },
+    {
+        "id": 9,
+        "datum": "2026-03-12",
+        "uhrzeit": "19:00",
         "kursbuchungen": []
     }
 ]
