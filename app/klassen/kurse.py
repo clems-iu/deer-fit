@@ -1,8 +1,10 @@
 #Enthält die Klassen für Kurse, Kurstermine und Kurspläne im Deer-Fit System.
 
+import uuid
+
 class Kurs:
-    def __init__(self, id, name, beschreibung, dauer, max_teilnehmer=10, schwierigkeitsgrad="Mittel"):
-        self.id = id
+    def __init__(self, name, beschreibung, dauer, max_teilnehmer=10, schwierigkeitsgrad="Mittel"):
+        self.id = str(uuid.uuid4())  # Generiert eine eindeutige ID für jeden Kurs
         self.name = name
         self.beschreibung = beschreibung
         self.dauer = dauer  # Dauer in Minuten
@@ -13,8 +15,8 @@ class Kurs:
         return f"{self.name}: {self.beschreibung} ({self.dauer} Minuten)"
 
 class Kurstermin:
-    def __init__(self, id, kurs, datum, uhrzeit, kursbuchungen=[]):
-        self.id = id
+    def __init__(self, kurs, datum, uhrzeit, kursbuchungen=[]):
+        self.id = str(uuid.uuid4())  # Generiert eine eindeutige ID für jeden Kurstermin
         self.kurs = kurs
         self.datum = datum  # Datum des Kurstermins
         self.uhrzeit = uhrzeit  # Uhrzeit des Kurstermins

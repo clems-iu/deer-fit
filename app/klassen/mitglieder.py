@@ -1,5 +1,6 @@
 # Enthält die Klassen für Mitglieder, Trainingsfortschritte und Mitgliedschaften im Deer-Fit System.
 
+import uuid
 
 class Mitglied:
     def trainingsplan_empfehlung(self, ziel="Allgemein", fortschritt=None):
@@ -33,10 +34,13 @@ class Mitglied:
         
     # Selectbox mit den Trainingszielen: Allgemein, Muskelaufbau, Abnehmen, Beweglichkeit -> 
                 
-    def __init__(self, vorname, nachname, mitgliedsnummer, trainingsfortschritt=[], mitgliedschaft={}):
+    def __init__(self, vorname, nachname, trainingsfortschritt=[], mitgliedschaft={}, mitgliedsnummer=None):
         self.vorname = vorname
         self.nachname = nachname
-        self.mitgliedsnummer = mitgliedsnummer
+        if mitgliedsnummer is None:
+            self.mitgliedsnummer = str(uuid.uuid4())  # Generiert eine eindeutige Mitgliedsnummer
+        else:
+            self.mitgliedsnummer = mitgliedsnummer
         self.trainingsfortschritt = trainingsfortschritt
         self.mitgliedschaft = mitgliedschaft
 

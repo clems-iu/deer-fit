@@ -4,7 +4,7 @@ import uuid
 
 class Equipment:
 	def __init__(self, name, anschaffungsjahr, kosten, sindKostenWiederkehrend=False):
-		self.id = uuid.uuid4()  # Generiert eine eindeutige ID für jedes Equipment
+		self.id = str(uuid.uuid4())  # Generiert eine eindeutige ID für jedes Equipment
 		self.name = name
 		self.anschaffungsjahr = anschaffungsjahr
 		self.kosten = kosten
