@@ -43,18 +43,20 @@
 - Datenspeicherung an einigen Stellen eingebunden
 - Formulare für Kurs, User, Buchung und Fortschritterstellung hinugefügt
 - Trainingsfortschritt Darstellung verbessert
-
-# Nächste Schritte
-
-- kurstermine hinzufügen, sowie trainer und equipment
+- kurstermine hinzufügen, sowie trainer und equipment hinzufügen in Admin-Sicht integriert
 - ids für kurse und user generieren
 - fixen der kursbuchung
 - Datenspeicherung
-- Bilanzen, Trainer und Equipment einbauen
+
+
+# Nächste Schritte
+- Buchungen in eigene Ordnerstruktur überführen
+- Bilanzen einbauen
 - Fortschrittsmodell verallgemeinern
 - Vorhersagemodell für nächste Kurse
 - Testing
 - Anpassung an thematischen Kontext
+- Kursanforderungen überprüfen
 
 
 
