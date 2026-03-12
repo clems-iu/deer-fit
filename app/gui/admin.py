@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import datetime
 from app.klassen.dataLoader import DataLoader
 from app.klassen.dataSaver import DataSaver
 from app.klassen.mitglieder import Mitglied
@@ -59,30 +60,6 @@ def show_admin():
 				else:
 					st.error("Fehler beim Anlegen des Mitglieds.")
 
-	# st.markdown('<div class="subtitle">📈 Fortschritt aller Mitglieder</div>', unsafe_allow_html=True)
-	# if deer_fit:
-	# 	for mitglied in deer_fit.mitglieder:
-	# 		fortschritt = mitglied.trainingsfortschritt
-	# 		if fortschritt:
-	# 			daten = []
-	# 			for eintrag in fortschritt:
-	# 				if isinstance(eintrag, dict):
-	# 					daten.append({"Datum": eintrag.get("datum"), "Übung": eintrag.get("übung"), "Max": eintrag.get("max")})
-	# 				else:
-	# 					daten.append({"Datum": getattr(eintrag, "datum", None), "Übung": getattr(eintrag, "übung", None), "Max": getattr(eintrag, "max", None)})
-	# 			df = pd.DataFrame(daten)
-	# 			if not df.empty:
-	# 				st.markdown(f"<b>{mitglied.vorname} {mitglied.nachname}</b>", unsafe_allow_html=True)
-	# 				for uebung in df["Übung"].unique():
-	# 					st.markdown(f"<span style='color:#2E8B57;font-style:italic;'>{uebung}</span>", unsafe_allow_html=True)
-	# 					df_uebung = df[df["Übung"] == uebung]
-	# 					fig, ax = plt.subplots()
-	# 					ax.plot(df_uebung["Datum"], df_uebung["Max"], marker="o", color="#2E8B57")
-	# 					ax.set_xlabel("Datum")
-	# 					ax.set_ylabel("Bester Wert")
-	# 					ax.set_title(f"Fortschritt: {uebung}")
-	# 					ax.grid(True, linestyle=":", alpha=0.5)
-	# 					st.pyplot(fig)
 
 	st.markdown('<div class="subtitle">🏋️ Kurse Übersicht</div>', unsafe_allow_html=True)
 	kursliste = dl.load_all_courses()
@@ -120,13 +97,13 @@ def show_admin():
 		for eq in equipment_liste:
 			st.markdown(f"<div class='mitglied-card'>"
 						f"<b style='color:#2E8B57;'>{eq.get('name')}</b> <span style='color:#888'>(#{eq.get('id','-')})</span><br>"
-						f"<span style='font-size:0.95em;color:#2E8B57'>Anschaffung: <b>{eq.get('anschaffungsjahr','-')}</b> | Kosten: {eq.get('kosten','-')} EUR | Wiederkehrend: {eq.get('sindKostenWiederkehrend', False)}</span>"
+						f"<span style='font-size:0.95em;color:#2E8B57'>Anschaffung: <b>{eq.get('anschaffungsdatum','-')}</b> | Kosten: {eq.get('kosten','-')} EUR | Wiederkehrend: {eq.get('sindKostenWiederkehrend', False)}</span>"
 						f"</div>", unsafe_allow_html=True)
 
 	with st.expander("➕ Neues Equipment hinzufügen", expanded=False):
 		with st.form("add_equipment_form"):
 			eq_name = st.text_input("Name")
-			eq_jahr = st.number_input("Anschaffungsjahr", min_value=2000, max_value=2100, value=2024)
+			eq_datum = st.date_input("Anschaffungsdatum", format="YYYY-MM-DD")
 			eq_kosten = st.number_input("Kosten (EUR)", min_value=0, value=0)
 			eq_wiederkehrend = st.checkbox("Kosten wiederkehrend?", value=False)
 			submitted_eq = st.form_submit_button("Equipment anlegen")
@@ -135,7 +112,7 @@ def show_admin():
 				eq_data = {
 					"id": str(uuid.uuid4()),
 					"name": eq_name,
-					"anschaffungsjahr": eq_jahr,
+					"anschaffungsdatum": str(eq_datum),
 					"kosten": eq_kosten,
 					"sindKostenWiederkehrend": eq_wiederkehrend
 				}
@@ -197,8 +174,84 @@ def show_admin():
 				else:
 					st.error("Fehler beim Anlegen des Termins.")
 
-	st.markdown('<div class="subtitle">💶 Finanzübersicht</div>', unsafe_allow_html=True)
-	st.info("Finanzdaten-Integration möglich, sobald Finanzverwaltung angebunden ist.")
+
+	# --- Kostenübersicht ---
+	
+	st.markdown('<div class="subtitle">💶 Kostenübersicht (Monat)</div>', unsafe_allow_html=True)
+	# Aktueller Monat und Jahr
+	heute = datetime.date.today()
+	aktueller_monat = heute.month
+	aktuelles_jahr = heute.year
+
+	# Equipment-Kosten berechnen
+	equipment_liste = dl.load_equipment()
+	kosten_summe = 0
+	kosten_zeilen = []
+	for eq in equipment_liste:
+		anschaffungsdatum_str = eq.get('anschaffungsdatum', '')
+		try:
+			anschaffungsdatum = datetime.datetime.strptime(str(anschaffungsdatum_str), '%Y-%m-%d').date()
+			anschaffungsjahr = anschaffungsdatum.year
+			anschaffungsmonat = anschaffungsdatum.month
+		except Exception:
+			anschaffungsjahr = 0
+			anschaffungsmonat = 0
+		kosten = float(eq.get('kosten', 0))
+		wiederkehrend = eq.get('sindKostenWiederkehrend', False)
+		# Kosten zählen, wenn wiederkehrend oder im aktuellen Monat angeschafft
+		if wiederkehrend or (anschaffungsjahr == aktuelles_jahr and anschaffungsmonat == aktueller_monat):
+			kosten_summe += kosten
+			kosten_zeilen.append({
+				'name': eq.get('name', '-'),
+				'kosten': kosten
+			})
+
+	# Einkünfte durch Mitgliedsbeiträge berechnen
+	userliste = dl.get_all_users()
+	einkuenfte_summe = 0
+	einkunft_zeilen = []
+	for mitglied in userliste:
+		mitgliedschaft = mitglied.mitgliedschaft
+		typ = mitgliedschaft.get('typ', '')
+		start = mitgliedschaft.get('startdatum', '')
+		ende = mitgliedschaft.get('enddatum', '')
+		try:
+			start_dt = datetime.datetime.strptime(start, '%Y-%m-%d').date()
+			ende_dt = datetime.datetime.strptime(ende, '%Y-%m-%d').date()
+		except Exception:
+			continue
+		# Mitgliedschaft im aktuellen Monat aktiv?
+		if start_dt <= heute <= ende_dt:
+			if typ == 'Basis':
+				beitrag = 20
+			elif typ == 'Premium':
+				beitrag = 35
+			else:
+				beitrag = 0
+			einkuenfte_summe += beitrag
+			einkunft_zeilen.append({
+				'name': f"{mitglied.vorname} {mitglied.nachname}",
+				'beitrag': beitrag
+			})
+
+	# Tabelle anzeigen
+	
+	kosten_df = pd.DataFrame(kosten_zeilen)
+	eink_df = pd.DataFrame(einkunft_zeilen)
+	max_len = max(len(kosten_df), len(eink_df))
+	# Padding für gleichlange Tabellen
+	kosten_df = kosten_df.reindex(range(max_len)).fillna('')
+	eink_df = eink_df.reindex(range(max_len)).fillna('')
+	# Kombinierte Tabelle
+	table = pd.DataFrame({
+		'Kosten': kosten_df['name'],
+		'Betrag (€)': kosten_df['kosten'],
+		'Einkünfte': eink_df['name'],
+		'Beitrag (€)': eink_df['beitrag']
+	})
+	st.table(table)
+	# Resultatszeile
+	st.markdown(f"**Gesamtkosten:** {kosten_summe:.2f} € | **Gesamteinkünfte:** {einkuenfte_summe:.2f} € | **Ergebnis:** {einkuenfte_summe - kosten_summe:.2f} €")
 
 	st.markdown("<br>", unsafe_allow_html=True)
 	st.button("🚪 Logout", on_click=lambda: logout())
