@@ -47,13 +47,13 @@
 - ids für kurse und user generieren
 - fixen der kursbuchung
 - Datenspeicherung
-
-
-# Nächste Schritte
-- Buchungen in eigene Ordnerstruktur überführen
 - Bilanzen einbauen
 - Fortschrittsmodell verallgemeinern
 - Vorhersagemodell für nächste Kurse
+
+# Nächste Schritte
+- Löschfunktionen einbauen
+- Anmelden nicht über mitgliedsnummer
 - Testing
 - Anpassung an thematischen Kontext
 - Kursanforderungen überprüfen
