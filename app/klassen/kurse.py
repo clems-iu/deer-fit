@@ -3,20 +3,27 @@
 import uuid
 
 class Kurs:
-    def __init__(self, name, beschreibung, dauer, max_teilnehmer=10, schwierigkeitsgrad="Mittel"):
-        self.id = str(uuid.uuid4())  # Generiert eine eindeutige ID für jeden Kurs
+    def __init__(self, name, beschreibung, dauer, max_teilnehmer=10, schwierigkeitsgrad="Mittel", typ="Allgemein", id = None):
+        if id is None:
+            self.id = str(uuid.uuid4())  # Generiert eine eindeutige Id
+        else:
+            self.id = id  # Verwendet die übergebene ID für jeden Kurs
         self.name = name
         self.beschreibung = beschreibung
         self.dauer = dauer  # Dauer in Minuten
         self.max_teilnehmer = max_teilnehmer  # Maximale Teilnehmeranzahl
         self.schwierigkeitsgrad = schwierigkeitsgrad  # z.B. "Einfach", "Mittel", "Schwer"
+        self.typ = typ  # Kann "Kraft", "Cardio", "Yoga", "Speziell" sein
         
     def __str__(self):
         return f"{self.name}: {self.beschreibung} ({self.dauer} Minuten)"
 
 class Kurstermin:
-    def __init__(self, kurs, datum, uhrzeit, kursbuchungen=[]):
-        self.id = str(uuid.uuid4())  # Generiert eine eindeutige ID für jeden Kurstermin
+    def __init__(self, kurs, datum, uhrzeit, kursbuchungen=[], id = None):
+        if id is None:
+            self.id = str(uuid.uuid4())  # Generiert eine eindeutige Id
+        else:
+            self.id = id  # Verwendet die übergebene ID für jeden Kurstermin
         self.kurs = kurs
         self.datum = datum  # Datum des Kurstermins
         self.uhrzeit = uhrzeit  # Uhrzeit des Kurstermins

@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
+import uuid
+from streamlit_calendar import calendar
 from app.klassen.dataLoader import DataLoader
 from app.klassen.dataSaver import DataSaver
 from app.klassen.mitglieder import Mitglied
@@ -108,7 +110,6 @@ def show_admin():
 			eq_wiederkehrend = st.checkbox("Kosten wiederkehrend?", value=False)
 			submitted_eq = st.form_submit_button("Equipment anlegen")
 			if submitted_eq:
-				import uuid
 				eq_data = {
 					"id": str(uuid.uuid4()),
 					"name": eq_name,
@@ -123,7 +124,7 @@ def show_admin():
 
 	# --- Kalender für Kurstermine ---
 	st.markdown('<div class="subtitle">📅 Kurs-Termine Kalender</div>', unsafe_allow_html=True)
-	from streamlit_calendar import calendar
+	
 	# Alle Termine aus allen Kursen sammeln
 	all_courses = dl.load_all_courses()
 	all_events = []
@@ -165,7 +166,7 @@ def show_admin():
 				kurs_id = all_courses[kurs_names.index(kurs_name)].get('id')
 				termine = dl.load_course_dates(kurs_id)
 				# Neue ID generieren
-				new_id = max([t.get('id', 0) for t in termine], default=0) + 1
+				new_id = str(uuid.uuid4())
 				new_termin = {"id": new_id, "datum": str(datum), "uhrzeit": uhrzeit, "kursbuchungen": []}
 				termine.append(new_termin)
 				# Speichern
