@@ -4,5 +4,6 @@
     "beschreibung": "Beginner Kurs für Einsteiger in Brazilian Jiu-Jitsu",
     "schwierigkeitsgrad": "Einfach",
     "dauer": 75,
-    "max_teilnehmer": 15
+    "max_teilnehmer": 15,
+    "typ": "Speziell"
 }

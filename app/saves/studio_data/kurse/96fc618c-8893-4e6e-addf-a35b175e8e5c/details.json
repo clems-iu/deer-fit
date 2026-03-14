@@ -4,5 +4,6 @@
     "beschreibung": "Kurs für erfahrenere Gym-Mitglieder",
     "dauer": 60,
     "max_teilnehmer": 10,
-    "schwierigkeitsgrad": "Mittel"
+    "schwierigkeitsgrad": "Mittel",
+    "typ": "Speziell"
 }

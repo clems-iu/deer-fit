@@ -4,5 +4,6 @@
     "beschreibung": "Intensives Ausdauertraining auf dem Rad",
     "dauer": 45,
     "max_teilnehmer": 20,
-    "schwierigkeitsgrad": "Mittel"
+    "schwierigkeitsgrad": "Mittel",
+    "typ": "Cardio"
 }

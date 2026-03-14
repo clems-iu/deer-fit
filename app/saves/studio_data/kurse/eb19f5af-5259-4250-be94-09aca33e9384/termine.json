@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "datum": "2026-03-26",
+        "uhrzeit": "14:00",
+        "kursbuchungen": [
+            "1001"
+        ]
+    },
+    {
+        "id": "2043cbf7-c12e-4032-85ae-553f1e138d9c",
+        "datum": "2026-03-28",
+        "uhrzeit": "15:30",
+        "kursbuchungen": []
+    }
+]

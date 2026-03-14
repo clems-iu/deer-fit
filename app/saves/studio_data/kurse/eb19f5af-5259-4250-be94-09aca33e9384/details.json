@@ -1,0 +1,9 @@
+{
+    "id": "eb19f5af-5259-4250-be94-09aca33e9384",
+    "name": "Bjj - Experts",
+    "beschreibung": "Kurs für erfahrener Kampfsportler",
+    "dauer": 60,
+    "max_teilnehmer": 10,
+    "schwierigkeitsgrad": "Schwer",
+    "typ": "Allgemein"
+}
