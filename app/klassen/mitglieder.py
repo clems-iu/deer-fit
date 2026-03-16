@@ -1,5 +1,6 @@
 # Enthält die Klassen für Mitglieder, Trainingsfortschritte und Mitgliedschaften im Deer-Fit System.
 
+from unicodedata import name
 import uuid
 
 class Mitglied:
@@ -38,7 +39,7 @@ class Mitglied:
         self.vorname = vorname
         self.nachname = nachname
         if mitgliedsnummer is None:
-            self.mitgliedsnummer = str(uuid.uuid4())  # Generiert eine eindeutige Mitgliedsnummer
+            self.mitgliedsnummer = self.name_to_id(self.vorname + " " + self.nachname)  # Generiert eine eindeutige Mitgliedsnummer
         else:
             self.mitgliedsnummer = mitgliedsnummer
         self.trainingsfortschritt = trainingsfortschritt
@@ -49,6 +50,12 @@ class Mitglied:
     
     def trainingsfortschritt_hinzufuegen(self, fortschritt):
         self.trainingsfortschritt.append(fortschritt)
+        
+    def name_to_id(self, name: str) -> str:
+        # Name in Bytes (UTF-8)
+        b = name.encode("utf-8")
+        # Bytes als große Zahl interpretieren
+        return str(int.from_bytes(b, byteorder="big"))
     
 class Trainingsfortschritt:
     def __init__(self, datum, übung, max):
