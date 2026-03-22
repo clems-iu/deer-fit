@@ -27,21 +27,25 @@ def normalize_fortschritte(fortschritte):
     daten = []
     for eintrag in fortschritte:
         if isinstance(eintrag, dict):
-            daten.append({
-                "Datum": eintrag.get("datum"),
-                "Übung": eintrag.get("übung"),
-                "Best": eintrag.get("best"),
-                "Einheit": eintrag.get("einheit"),
-                "Reps": eintrag.get("reps"),
-            })
+            daten.append(
+                {
+                    "Datum": eintrag.get("datum"),
+                    "Übung": eintrag.get("übung"),
+                    "Best": eintrag.get("best"),
+                    "Einheit": eintrag.get("einheit"),
+                    "Reps": eintrag.get("reps"),
+                }
+            )
         else:
-            daten.append({
-                "Datum": getattr(eintrag, "datum", None),
-                "Übung": getattr(eintrag, "übung", None),
-                "Best": getattr(eintrag, "best", None),
-                "Einheit": getattr(eintrag, "einheit", None),
-                "Reps": getattr(eintrag, "reps", None),
-            })
+            daten.append(
+                {
+                    "Datum": getattr(eintrag, "datum", None),
+                    "Übung": getattr(eintrag, "übung", None),
+                    "Best": getattr(eintrag, "best", None),
+                    "Einheit": getattr(eintrag, "einheit", None),
+                    "Reps": getattr(eintrag, "reps", None),
+                }
+            )
     return pd.DataFrame(daten)
 
 
@@ -60,7 +64,9 @@ def visualize_user_trainingsfortschritt(mitgliedsnummer: str):
         logger.info("Keine Daten zum Visualisieren verfügbar.")
         return
 
-    logger.info(f"Visualisiere Trainingsfortschritt für {len(df['Übung'].unique())} Übungen")
+    logger.info(
+        f"Visualisiere Trainingsfortschritt für {len(df['Übung'].unique())} Übungen"
+    )
 
     for uebung in df["Übung"].dropna().unique():
         df_uebung = df[df["Übung"] == uebung].copy()
@@ -71,16 +77,24 @@ def visualize_user_trainingsfortschritt(mitgliedsnummer: str):
 
             with col1:
                 fig1, ax1 = plt.subplots()
-                ax1.plot(df_uebung["Datum"], df_uebung["Best"], marker="o", color="blue")
+                ax1.plot(
+                    df_uebung["Datum"], df_uebung["Best"], marker="o", color="blue"
+                )
                 ax1.set_xlabel("Datum")
-                ax1.set_ylabel(df_uebung["Einheit"].iloc[0] if not df_uebung["Einheit"].empty else "Best")
+                ax1.set_ylabel(
+                    df_uebung["Einheit"].iloc[0]
+                    if not df_uebung["Einheit"].empty
+                    else "Best"
+                )
                 ax1.set_title(f"{uebung} - Bester Wert")
                 st.pyplot(fig1)
                 plt.close(fig1)
 
             with col2:
                 fig2, ax2 = plt.subplots()
-                ax2.plot(df_uebung["Datum"], df_uebung["Reps"], marker="o", color="green")
+                ax2.plot(
+                    df_uebung["Datum"], df_uebung["Reps"], marker="o", color="green"
+                )
                 ax2.set_xlabel("Datum")
                 ax2.set_ylabel("Wiederholungen")
                 ax2.set_title(f"{uebung} - Wiederholungen")
@@ -89,7 +103,12 @@ def visualize_user_trainingsfortschritt(mitgliedsnummer: str):
 
             with col3:
                 fig3, ax3 = plt.subplots()
-                ax3.plot(df_uebung["Datum"], df_uebung["Best"] * df_uebung["Reps"], marker="o", color="orange")
+                ax3.plot(
+                    df_uebung["Datum"],
+                    df_uebung["Best"] * df_uebung["Reps"],
+                    marker="o",
+                    color="orange",
+                )
                 ax3.set_xlabel("Datum")
                 ax3.set_ylabel("Bester Wert x Wiederholungen")
                 ax3.set_title(f"{uebung} - Bester Wert x Wiederholungen")
@@ -99,9 +118,15 @@ def visualize_user_trainingsfortschritt(mitgliedsnummer: str):
             col1, col2, col3 = st.columns(3)
             with col2:
                 fig, ax = plt.subplots()
-                ax.plot(df_uebung["Datum"], df_uebung["Best"] * df_uebung["Reps"], marker="o")
+                ax.plot(
+                    df_uebung["Datum"],
+                    df_uebung["Best"] * df_uebung["Reps"],
+                    marker="o",
+                )
                 ax.set_xlabel("Datum")
-                ax.set_ylabel(f"Bester Wert bei {df_uebung['Reps'].iloc[0]} Wiederholungen")
+                ax.set_ylabel(
+                    f"Bester Wert bei {df_uebung['Reps'].iloc[0]} Wiederholungen"
+                )
                 ax.set_title(str(uebung))
                 st.pyplot(fig)
                 plt.close(fig)
@@ -123,7 +148,9 @@ def add_trainingsfortschritt_form(mitgliedsnummer: str):
         repo = get_fortschritts_repo(mitgliedsnummer)
         new_entry = Trainingsfortschritt(str(datum), uebung, best, einheit, reps)
         repo.add(new_entry)
-        logger.info(f"Neuer Trainingsfortschritt gespeichert für Mitglied {mitgliedsnummer}: {new_entry}")
+        logger.info(
+            f"Neuer Trainingsfortschritt gespeichert für Mitglied {mitgliedsnummer}: {new_entry}"
+        )
         st.success("Trainingsfortschritt gespeichert.")
 
 
@@ -132,7 +159,9 @@ def show_trainingsfortschritt():
 
     mitgliedsnummer = st.session_state.get("mitgliedsnummer")
     if not mitgliedsnummer:
-        logger.warning("Mitgliedsnummer nicht gefunden. Kann Trainingsfortschritt nicht anzeigen.")
+        logger.warning(
+            "Mitgliedsnummer nicht gefunden. Kann Trainingsfortschritt nicht anzeigen."
+        )
         st.warning("Mitgliedsnummer nicht gefunden. Bitte logge dich erneut ein.")
         return
 

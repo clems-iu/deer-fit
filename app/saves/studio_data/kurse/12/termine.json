@@ -7,60 +7,70 @@
             "12345",
             "67890",
             "1001"
-        ]
+        ], 
+        "kursId": 12
     },
     {
         "id": 24356,
         "datum": "2026-02-12",
         "uhrzeit": "12:00",
-        "kursbuchungen": []
+        "kursbuchungen": [], 
+        "kursId": 12
     },
     {
         "id": 3456,
         "datum": "2026-02-12",
         "uhrzeit": "19:00",
-        "kursbuchungen": []
+        "kursbuchungen": [], 
+        "kursId": 12
     },
     {
         "id": 24365,
         "datum": "2026-02-12",
         "uhrzeit": "12:00",
-        "kursbuchungen": []
+        "kursbuchungen": [], 
+        "kursId": 12
     },
     {
         "id": 33456,
         "datum": "2026-02-12",
         "uhrzeit": "19:00",
-        "kursbuchungen": []
+        "kursbuchungen": [], 
+        "kursId": 12
     },
     {
         "id": 43456,
         "datum": "2026-02-19",
         "uhrzeit": "14:00",
-        "kursbuchungen": []
+        "kursbuchungen": [], 
+        "kursId": 12
     },
     {
         "id": 54356,
         "datum": "2026-02-19",
         "uhrzeit": "12:00",
-        "kursbuchungen": []
+        "kursbuchungen": [], 
+        "kursId": 12
     },
     {
         "id": 63456,
         "datum": "2026-02-19",
         "uhrzeit": "19:00",
-        "kursbuchungen": []
+        "kursbuchungen": [], 
+        "kursId": 12
     },
     {
         "id": 73456,
         "datum": "2026-02-21",
         "uhrzeit": "18:00",
-        "kursbuchungen": []
+        "kursbuchungen": [], 
+        "kursId": 12
     },
     {
         "id": 83456,
         "datum": "2026-03-10",
         "uhrzeit": "16:00",
-        "kursbuchungen": []
+        "kursbuchungen": [], 
+        "kursId": 12
     }
 ]

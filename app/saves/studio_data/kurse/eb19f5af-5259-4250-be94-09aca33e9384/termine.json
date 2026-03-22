@@ -5,12 +5,14 @@
         "uhrzeit": "14:00",
         "kursbuchungen": [
             "1001"
-        ]
+        ], 
+        "kursId": "eb19f5af-5259-4250-be94-09aca33e9384"
     },
     {
         "id": "2043cbf7-c12e-4032-85ae-553f1e138d9c",
         "datum": "2026-03-28",
         "uhrzeit": "15:30",
-        "kursbuchungen": []
+        "kursbuchungen": [],
+        "kursId": "eb19f5af-5259-4250-be94-09aca33e9384"
     }
 ]

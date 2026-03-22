@@ -13,7 +13,7 @@ class JsonListRepository(Generic[T]):
         from_dict: Callable[[dict], T],
         to_dict: Callable[[T], dict],
     ):
-        self._path = Path("app/saves/" + path)
+        self._path = Path("app/saves/" + str(path))
         self._item_cls = item_cls
         self._from_dict = from_dict
         self._to_dict = to_dict
