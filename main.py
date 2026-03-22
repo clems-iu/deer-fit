@@ -9,11 +9,22 @@
 
 # Streamlit App: Login und Weiterleitung
 import streamlit as st
-from app.gui import login, user, admin
+import logging
+
+from config.logging_config import setup_logging
+from app.gui.user_view import user
+from app.gui.admin_view import admin
+from app.gui.login_view import login
+
+
 
 
 def main():
     st.set_page_config(page_title="Deer-Fit", page_icon="🦌", layout="wide")
+    
+    setup_logging()
+    logger = logging.getLogger(__name__)
+    logger.info("System gestartet")
 
     if 'logged_in' not in st.session_state:
         st.session_state.logged_in = False
