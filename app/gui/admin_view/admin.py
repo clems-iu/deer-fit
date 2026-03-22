@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import datetime
 import uuid
 from streamlit_calendar import calendar
-from app.klassen.dataLoader import DataLoader
-from app.klassen.dataSaver import DataSaver
+from app.klassen.intern.dataLoader import DataLoader
+from app.klassen.intern.dataSaver import DataSaver
 from app.klassen.mitglieder import Mitglied
 from app.klassen.kurse import Kurs, Kurstermin
 

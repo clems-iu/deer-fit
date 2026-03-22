@@ -1,11 +1,20 @@
-import streamlit as st
-from app.klassen.authenticator import Authenticator
+import logging
+from unicodedata import name
 
-def name_to_id(name: str) -> str:
+import streamlit as st
+from app.klassen.intern.authenticator import Authenticator
+
+logger = logging.getLogger(__name__)
+if not logger.hasHandlers():
+	logging.basicConfig(
+		level=logging.DEBUG, format="%(asctime)s %(levelname)s %(name)s: %(message)s"
+	)
+
+def name_to_id(name: str) -> int:
 		# Name in Bytes (UTF-8)
 		b = name.encode("utf-8")
 		# Bytes als große Zahl interpretieren
-		return str(int.from_bytes(b, byteorder="big"))
+		return int.from_bytes(b, byteorder="big")
 
 def id_to_name(member_id: int) -> str:
 	# Minimale Byte-Länge bestimmen
@@ -14,6 +23,7 @@ def id_to_name(member_id: int) -> str:
 	return b.decode("utf-8")
 	
 def show_login():
+
 
 	# mittlere von 3 Spalten nutzen (1/3 der Fläche)
 	col_left, col_center, col_right = st.columns([1, 1, 1])
@@ -24,13 +34,15 @@ def show_login():
 			password = st.text_input("Passwort", type="password")
 
 			if st.button("Login"):
+				logger.info(f"Login-Versuch mit Name: {name}")
 				if name and password:
 					if name == "admin" and password == "admin":
 						mitgliedsnummer = "admin"
 					else:
 						mitgliedsnummer = name_to_id(name)
+						logger.debug(f"Umgewandelte Mitgliedsnummer: {mitgliedsnummer}")
 					auth = Authenticator()
-					auth.login(mitgliedsnummer, password)
+					antwort = auth.login(mitgliedsnummer, password)
 					if auth.authenticated:
 						st.session_state.logged_in = True
 						st.session_state.role = auth.role
@@ -38,6 +50,6 @@ def show_login():
 						st.success(f"Erfolgreich als {auth.role} eingeloggt!")
 						st.rerun()
 					else:
-						st.error("Ungültige Anmeldedaten. Bitte erneut versuchen.")
+						st.error(antwort)
 				else:
 					st.warning("Bitte Name und Passwort eingeben.")

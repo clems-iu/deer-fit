@@ -52,11 +52,18 @@
 - Vorhersagemodell für nächste Kurse
 
 # Nächste Schritte
-- Löschfunktionen einbauen
-- Anmelden nicht über mitgliedsnummer
+
+- Neue abstrakte Funktionen einbinden
+- Neue Dateitrennung weiterführen und zum laufen bekommen
+- Löschfunktionen einbauen, Anmeldung löschen
+- Anmelden nicht über mitgliedsnummer (Erste Version fertig)
+- Aufplitten der Dateien
+- Einbindung logischer Folgen, neuer Kurs erfordert Verfügbarkeit von Raum oder Trainer, nur gültige Mitgliedschaften sind erlaubt
+- Vereinheitlichung der Benennungssprache von Funktionen?
 - Testing
 - Anpassung an thematischen Kontext
 - Kursanforderungen überprüfen
+- testdaten bereinigen
 
 
 
@@ -66,3 +73,19 @@
 - Kurs 1:n Kurstermin 1:n Kursbuchung 
 - Mitglied 1:1 Mitgliedschaft
 - Mitglied 1:n Trainingfortschritte
+
+
+
+# Anforderungen an das Projekt
+
+− Software Requirements definieren
+− (Beispielhaft) Unit-Tests implementiert
+− Mindestens drei Integration-Tests implementiert und dem zugehörigen Software Requirement zuordnen
+− Lesbarer, strukturierter und dokumentierter Code
+− Dokumentation inklusive Nutzungsanweisung
+− Definiertes Setup in der Readme Datei beschreiben (Python Umgebung definieren, benötigte Pakete)
+− How-to-use-app (z.B. in der Readme)
+− Welche Features wurden implementiert/teilweise implementiert/nicht umgesetzt
+− Known-Bugs
+− Software Design Diagramme (z.B. Use-Case, Sequenzdiagramm)
+− CI-Pipeline dokumentiert (Befehlsreihenfolge, requirements.txt)
