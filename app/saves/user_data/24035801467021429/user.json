@@ -1,0 +1,11 @@
+{
+    "vorname": "Udo",
+    "nachname": "Uhu",
+    "mitgliedsnummer": "24035801467021429",
+    "trainingsfortschritt": [],
+    "mitgliedschaft": {
+        "typ": "Basis",
+        "startdatum": "2026-03-16",
+        "enddatum": "2029-03-23"
+    }
+}
