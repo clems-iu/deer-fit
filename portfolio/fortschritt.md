@@ -55,6 +55,9 @@
 
 - Neue abstrakte Funktionen einbinden
 - Neue Dateitrennung weiterführen und zum laufen bekommen
+- gebuchte Kurse farbig hinterlegen in user ansicht
+- Empfehlung falls Schwierigkeit gleichbleibend
+- Button inaktiv falls schon gebucht
 - Löschfunktionen einbauen, Anmeldung löschen
 - Anmelden nicht über mitgliedsnummer (Erste Version fertig)
 - Aufplitten der Dateien
@@ -65,6 +68,13 @@
 - Kursanforderungen überprüfen
 - testdaten bereinigen
 
+
+# Erweiterungsmöglichkeiten
+- Authentifikation
+- Datenbankanbindung
+- Bessere UX
+- Bearbeitung von Daten
+- Userspeicherung über mehr als nur Namen, damit mehrere mit gleichem Namen vorkommen können
 
 
 # Aufbau der bisher erstellten Klassen
