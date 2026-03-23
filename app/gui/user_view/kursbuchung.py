@@ -215,7 +215,7 @@ def get_kursempfehlungen():
         passende_kurse = [
             k
             for k in kurse
-            if k["typ"] == typ and k["schwierigkeitsgrad"] == schwierigkeits_empf
+            if k.typ == typ and k.schwierigkeitsgrad == schwierigkeits_empf
         ]
         if not passende_kurse:
             logger.warning(
@@ -225,22 +225,22 @@ def get_kursempfehlungen():
 
         kurs_empf = passende_kurse[0]
         logger.debug(
-            f"get_kursempfehlungen: Empfohlener Kurs: {kurs_empf.get('name', 'unbekannt')} (ID: {kurs_empf.get('id')})"
+            f"get_kursempfehlungen: Empfohlener Kurs: {kurs_empf.name} (ID: {kurs_empf.id})"
         )
 
         # Nächster Termin ab heute
         heute = datetime.now().date()
-        termine_kurs = [t for t in termine if t["kurs"].id == kurs_empf["id"]]
+        termine_kurs = [t for t in termine if t.kurs.id == kurs_empf.id]
         logger.debug(
-            f"get_kursempfehlungen: {len(termine_kurs)} Termine für Kurs {kurs_empf.get('id')} gefunden"
+            f"get_kursempfehlungen: {len(termine_kurs)} Termine für Kurs {kurs_empf.id} gefunden"
         )
 
-        termine_kurs = sorted(termine_kurs, key=lambda t: t["kurstermin"].datum)
+        termine_kurs = sorted(termine_kurs, key=lambda t: t.datum)
         naechster_termin = None
 
         for t in termine_kurs:
             try:
-                termin_datum = t["kurstermin"].datum
+                termin_datum = t.datum
                 if isinstance(termin_datum, str):
                     termin_datum = datetime.strptime(termin_datum, "%Y-%m-%d").date()
                 if termin_datum >= heute:
@@ -260,17 +260,17 @@ def get_kursempfehlungen():
                 {
                     "typ": typ,
                     "kurs": kurs_empf,
-                    "termin": naechster_termin["kurstermin"],
-                    "datum": naechster_termin["kurstermin"].datum,
-                    "uhrzeit": naechster_termin["kurstermin"].uhrzeit,
+                    "termin": naechster_termin,
+                    "datum": naechster_termin.datum,
+                    "uhrzeit": naechster_termin.uhrzeit,
                 }
             )
             logger.info(
-                f"get_kursempfehlungen: Empfehlung erstellt für Typ '{typ}', Kurs '{kurs_empf.get('name')}', Termin {naechster_termin['kurstermin'].datum}"
+                f"get_kursempfehlungen: Empfehlung erstellt für Typ '{typ}', Kurs '{kurs_empf.name}', Termin {naechster_termin.datum}"
             )
         else:
             logger.warning(
-                f"get_kursempfehlungen: Kein zukünftiger Termin für empfohlenen Kurs '{kurs_empf.get('name')}' gefunden"
+                f"get_kursempfehlungen: Kein zukünftiger Termin für empfohlenen Kurs '{kurs_empf.name}' gefunden"
             )
 
     logger.info(
@@ -281,6 +281,7 @@ def get_kursempfehlungen():
 
 def show_kursbuchungen():
     st.subheader("Kurs-Termine buchen")
+    user_id = str(st.session_state.mitgliedsnummer)
     # Empfehlungen anzeigen
     empfehlungen = get_kursempfehlungen()
     if empfehlungen:
@@ -289,12 +290,11 @@ def show_kursbuchungen():
             kurs = emp["kurs"]
             termin = emp["termin"]
             st.markdown(
-                f"**{kurs['name']}** ({kurs['typ']}, Schwierigkeit: {kurs['schwierigkeitsgrad']})<br>Nächster Termin: {emp['datum']} um {emp['uhrzeit']}",
+                f"**{kurs.name}** ({kurs.typ}, Schwierigkeit: {kurs.schwierigkeitsgrad})<br>Nächster Termin: {emp['datum']} um {emp['uhrzeit']}",
                 unsafe_allow_html=True,
             )
             # Buchungsbutton direkt für Empfehlung
-            ds = DataSaver()
-            user_id = str(st.session_state.mitgliedsnummer)
+
             schon_gebucht = user_id in getattr(termin, "kursbuchungen", [])
             max_teilnehmer = getattr(termin.kurs, "max_teilnehmer", 0)
             anzahl_buchungen = len(getattr(termin, "kursbuchungen", []))
@@ -307,13 +307,15 @@ def show_kursbuchungen():
                     f"Empfohlenen Termin buchen: {kurs['name']} {emp['datum']} {emp['uhrzeit']}"
                 ):
                     try:
-                        termin.teilnehmer_hinzufuegen(user_id)
-                        ds.save_booking(
-                            {
-                                "mitgliedsnummer": user_id,
-                                "kurs_id": kurs["id"],
-                                "termin_id": termin.id,
-                            }
+                        kurstermin.teilnehmer_hinzufuegen(user_id)
+                        kurstermin_repo = get_kurstermineRepo(kurs.id)
+                        kurstermin_repo.update(
+                            predicate=lambda u: u.id == kurstermin.id,
+                            updater=lambda u: setattr(
+                                u,
+                                "kursbuchungen",
+                                getattr(u, "kursbuchungen", []) + [user_id],
+                            ),
                         )
                         st.success("Empfohlener Termin erfolgreich gebucht!")
                         logger.info(
@@ -325,6 +327,10 @@ def show_kursbuchungen():
                             exc_info=True,
                         )
                         st.error(f"Fehler beim Buchen: {str(e)}")
+    else:
+        st.info(
+            "Keine persönlichen Empfehlungen verfügbar. Buchen Sie gerne einen Kurs aus dem Kalender unten!"
+        )
 
     # Kalender anzeigen
     try:
@@ -343,6 +349,9 @@ def show_kursbuchungen():
             "title": t.kurs.name,
             "start": f"{t.datum}T{t.uhrzeit}:00",
             "end": f"{t.datum}T{t.uhrzeit}:00",
+            "color": (
+                "green" if user_id in t.kursbuchungen else "blue"
+            ),  # Grün, wenn der Nutzer schon gebucht hat, sonst Blau
         }
         for t in termine
     ]
@@ -353,7 +362,9 @@ def show_kursbuchungen():
             options={"selectable": True, "height": 500, "locale": "de"},
             custom_css=".fc-event {cursor:pointer;}",
         )
-        st.info("Klicken Sie auf einen Termin im Kalender, um zu buchen.")
+        st.info(
+            "Klicken Sie auf einen Termin im Kalender, um hier mehr Informationen anzuzeigen."
+        )
         logger.debug("Kalender erfolgreich angezeigt.")
     except Exception as e:
         logger.error(f"Fehler beim Anzeigen des Kalenders: {e}", exc_info=True)
@@ -393,7 +404,14 @@ def show_kursbuchungen():
             )
             try:
                 st.markdown(
-                    f"**{kurs.name}** am {kurstermin.datum} um {kurstermin.uhrzeit}"
+                    f"""
+					### 🧭 **{kurs.name}**
+					**Datum:** {kurstermin.datum}  
+					**Uhrzeit:** {kurstermin.uhrzeit}  
+					**Beschreibung:** {kurs.beschreibung}  
+					**Dauer:** {kurs.dauer} Minuten 
+					**Schwierigkeitsgrad:** {kurs.schwierigkeitsgrad}
+					"""
                 )
             except Exception as e:
                 logger.error(
@@ -401,8 +419,6 @@ def show_kursbuchungen():
                 )
                 st.error("Fehler beim Anzeigen der Kursdetails.")
                 return
-
-            user_id = str(st.session_state.mitgliedsnummer)
 
             # Prüfe, ob schon gebucht
             try:
