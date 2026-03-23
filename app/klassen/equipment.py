@@ -13,3 +13,20 @@ class Equipment:
 
 	def __str__(self):
 		return f"Equipment: {self.name} (Anschaffung: {self.anschaffungsdatum}, Kosten: {self.kosten} EUR, Wiederkehrend: {self.sindKostenWiederkehrend})"
+
+	def to_dict(self):
+		return {
+			"id": self.id,
+			"name": self.name,
+			"anschaffungsdatum": self.anschaffungsdatum,
+			"kosten": self.kosten,
+			"sindKostenWiederkehrend": self.sindKostenWiederkehrend
+		}
+  
+	def from_dict(data):
+			return Equipment(
+				name=data["name"],
+				anschaffungsdatum=data["anschaffungsdatum"],
+				kosten=data["kosten"],
+				sindKostenWiederkehrend=data.get("sindKostenWiederkehrend", False)  # Standardwert False, falls nicht vorhanden
+			)

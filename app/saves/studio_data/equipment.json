@@ -1,51 +1,58 @@
 [
-    {
-        "id": "550e8400-e29b-41d4-a716-446655440000",
-        "name": "Laufband",
-        "anschaffungsdatum": "2022-05-15",
-        "kosten": 1500,
-        "sindKostenWiederkehrend": false
-    },
-    {
-        "id": "550e8400-e29b-41d4-a716-446655440001",
-        "name": "Personaltrainer",
-        "anschaffungsdatum": "2022-05-15",
-        "kosten": 50,
-        "sindKostenWiederkehrend": true
-    },
-    {
-        "id": "550e8400-e29b-41d4-a716-446655440002",
-        "name": "Hantelset",
-        "anschaffungsdatum": "2023-05-15",
-        "kosten": 800,
-        "sindKostenWiederkehrend": false
-    },
-    {
-        "id": "550e8400-e29b-41d4-a716-446655440003",
-        "name": "Yogamatte Miete",
-        "anschaffungsdatum": "2024-05-15",
-        "kosten": 10,
-        "sindKostenWiederkehrend": true
-    },
-    {
-        "id": "1511f37a-13f1-43f4-a81c-ffe711ac4cbd",
-        "name": "Langhantel",
-        "anschaffungsdatum": "2022-05-11",
-        "kosten": 700,
-        "sindKostenWiederkehrend": false
-    },
-    {
-        "id": "18553a18-e4e4-4bd3-8a53-3c7b4745f888",
-        "name": "Boxsack",
-        "anschaffungsdatum": "2026-03-15",
-        "kosten": 200,
-        "sindKostenWiederkehrend": false
-    },
-    {
-        "id": "87627d4d-0ca3-43bb-9dff-b24cef6f9e63",
-        "name": "Laufband S89456",
-        "anschaffungsdatum": "2026-03-12",
-        "kosten": 2000,
-        "sindKostenWiederkehrend": false
-    }
+  {
+    "id": "2d4ffdfa-6f45-4003-a86a-5e24ecb30bef",
+    "name": "Laufband",
+    "anschaffungsdatum": "2022-05-15",
+    "kosten": 1500,
+    "sindKostenWiederkehrend": false
+  },
+  {
+    "id": "21035cb8-e1f5-4736-b97d-810a92e77b83",
+    "name": "Personaltrainer",
+    "anschaffungsdatum": "2022-05-15",
+    "kosten": 50,
+    "sindKostenWiederkehrend": true
+  },
+  {
+    "id": "c935c4a9-8543-460e-aed6-3271067ad39a",
+    "name": "Hantelset",
+    "anschaffungsdatum": "2023-05-15",
+    "kosten": 800,
+    "sindKostenWiederkehrend": false
+  },
+  {
+    "id": "0f3e5a61-1048-49ef-ab56-c1c837c28a48",
+    "name": "Yogamatte Miete",
+    "anschaffungsdatum": "2024-05-15",
+    "kosten": 10,
+    "sindKostenWiederkehrend": true
+  },
+  {
+    "id": "1687ae16-2511-464a-98f0-e2ed29873ce3",
+    "name": "Langhantel",
+    "anschaffungsdatum": "2022-05-11",
+    "kosten": 700,
+    "sindKostenWiederkehrend": false
+  },
+  {
+    "id": "931dbcaf-f695-498d-9cd0-233c233587cd",
+    "name": "Boxsack",
+    "anschaffungsdatum": "2026-03-15",
+    "kosten": 200,
+    "sindKostenWiederkehrend": false
+  },
+  {
+    "id": "06acf081-843e-4547-94f4-a90392e512b4",
+    "name": "Laufband S89456",
+    "anschaffungsdatum": "2026-03-12",
+    "kosten": 2000,
+    "sindKostenWiederkehrend": false
+  },
+  {
+    "id": "a4c41bba-5977-4598-9e50-b2ad562cea24",
+    "name": "Ausbilder Schmitt",
+    "anschaffungsdatum": "2026-03-24",
+    "kosten": 300,
+    "sindKostenWiederkehrend": true
+  }
 ]

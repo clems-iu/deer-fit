@@ -1,0 +1,9 @@
+{
+  "id": "94bc6eb7-a570-4049-8abd-5522beff36c8",
+  "name": "Familien-Yoga",
+  "beschreibung": "Yoga-Kurs für Jung und Alt, jede Familie ist willkommen.",
+  "dauer": 45,
+  "max_teilnehmer": 25,
+  "schwierigkeitsgrad": "Einfach",
+  "typ": "Allgemein"
+}

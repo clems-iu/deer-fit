@@ -37,6 +37,24 @@ class Mitglied:
         b = name.encode("utf-8")
         # Bytes als große Zahl interpretieren
         return int.from_bytes(b, byteorder="big")
+    
+    def from_dict(data: dict) -> "Mitglied":
+        return Mitglied(
+            vorname=data["vorname"],
+            nachname=data["nachname"],
+            trainingsfortschritt=[Trainingsfortschritt.from_dict(tf) for tf in data.get("trainingsfortschritt", [])],
+            mitgliedschaft=data.get("mitgliedschaft", {}),
+            mitgliedsnummer=data.get("mitgliedsnummer")
+        )
+        
+    def to_dict(self) -> dict:
+        return {
+            "vorname": self.vorname,
+            "nachname": self.nachname,
+            "trainingsfortschritt": [tf.to_dict() for tf in self.trainingsfortschritt],
+            "mitgliedschaft": self.mitgliedschaft,
+            "mitgliedsnummer": self.mitgliedsnummer
+        }
 
 
 class Trainingsfortschritt:
