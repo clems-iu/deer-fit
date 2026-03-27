@@ -3,3 +3,5 @@ streamlit-calendar
 pandas 
 matplotlib
 catboost
+pytest 
+pytest-cov

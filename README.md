@@ -38,3 +38,10 @@ streamlit run main.py
 ```
 
 Die Web-App ist standardmäßig unter http://localhost:8501 erreichbar.
+
+## Testing
+Im Projektordner folgendes ausführen:
+
+```bash
+pytest 
+```
