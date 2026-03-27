@@ -15,12 +15,11 @@
 - Speicherungssystem ausdenken, welches sauberen schnellen Zugriff für alle Screens ermöglicht
     - Speicherung in Dateien (Kurse, Mitglieder, Buchungen)
 - Klassen mit Attributen und Funktionen erstellen welche alle nötigen Objekte in diesem System beschreiben
-- Basis Initialierung mit einigen Mitgliedern, Trainern, Kursen und Equipment einrichten um initiale Verwendung zu ermöglichen (Erstmal im Terminal, initiale Daten aus csv?)
-- Trainingsempfehlungen machen -> Hinterlegen, welche Muskelgruppen wann optimal trainiert werden müssten? Oder aus Trainingszielen der Person ableitend? 
-
-- Web-UI mit Admin und Usersicht -> Anmeldebildschirm, Routing?
-    - User hat gebuchte Kurse, Kursplan, Fortschritte und Trainingsempfehlungen
-    - Admin hat Kostenverlauf, Ausstattung, Belegung und Kursplan mit mehr Details
+- Basis Initialierung mit einigen Mitgliedern, Trainern, Kursen und Equipment einrichten um initiale Verwendung zu ermöglichen (Erstmal im Terminal, initiale Daten aus json-Dateien)
+- Kurssempfehlungen machen  
+- Web-UI mit Admin und Usersicht 
+    - User hat gebuchte Kurse, Kursplan, Fortschritte und Kursempfehlungen
+    - Admin hat Kostenübersicht, Ausstattung, und Kursplan mit mehr Details
 
 
 # Bisheriger Fortschritt
@@ -72,9 +71,13 @@
 # Erweiterungsmöglichkeiten
 - Authentifikation
 - Datenbankanbindung
-- Bessere UX
-- Bearbeitung von Daten
+- Besseres UX
+- Bearbeitung und Löschung von Daten
 - Userspeicherung über mehr als nur Namen, damit mehrere mit gleichem Namen vorkommen können
+- Ladezeiten
+- Logging vereinheitlichen
+- Finanzen 
+- Empfehlungen auch, wenn aufgrund der Testdaten noch keine Entwicklung abzeichenbar ist
 
 
 # Aufbau der bisher erstellten Klassen
@@ -89,7 +92,7 @@
 # Anforderungen an das Projekt
 
 − Software Requirements definieren
-− (Beispielhaft) Unit-Tests implementiert
+    − (Beispielhaft) Unit-Tests implementiert
 − Mindestens drei Integration-Tests implementiert und dem zugehörigen Software Requirement zuordnen
 − Lesbarer, strukturierter und dokumentierter Code
 − Dokumentation inklusive Nutzungsanweisung

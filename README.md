@@ -13,7 +13,19 @@ Erstelle eine Python-basierte Anwendung, in der Diego, der Hirsch, ein Fitnessst
 - Gewinne und Ausgaben zu erfassen (Mitgliedsbeiträge, Gerätekosten, Trainerhonorare)
 - Fitnessberichte zu visualisieren (Fortschrittskurven der letzten Monate)
 - Klassen für Mitglieder, Kurse, Trainer und Geräte zu verwenden
-- Personalisierte Trainingspläne zu empfehlen (basierend auf Zielen und Fortschritt) *(sei hier kreativ)*
+- Personalisierte Trainingspläne zu empfehlen (basierend auf Zielen und Fortschritt) 
+
+## Informationen für die Nutzung
+- Die Login-Informationen für die Admin-Sicht sind username: admin, passwort: admin
+- Die Anmeldung für User läuft über die Eingabe des Vor- und Nachnamens als username und ein beliebiges Passwort
+    - Beispielsweise ein User mit hinterlegten Testdaten, dessen Nutzung sich anbieten würde wäre:
+        - Username: Rudy Rentier
+        - Passwort: beliebige Zeichenkette 
+- Die Speicherung von Daten ist persistent, also werden getätigte Aktionen, wie beispielsweise Buchungen für zukünftige Sessions gespeichert
+- Sowohl Kurs-, als auch Userdaten sind in Ordnern, der ihre id tragen im jeweiligen Ordner unter app/saves hinterlegt
+- Aktuell können nur Daten hinzugefügt werden, die Löschung / das Updaten von Daten sind technisch vorhanden, konnten aber zeitlich nicht mehr ins UI eingebunden werden 
+- Testing ist anhand von Unittests und Integrationstests implementiert, Unittests beispielhaft anhand der zentralen Klasse jsonFolderRepository
+
 
 ## Voraussetzungen
 - Python 3.8+
