@@ -2,7 +2,7 @@
 
 ##  Projektüberblick
 **DeerFit** ist eine Python-basierte Fitnessstudio-Verwaltungsanwendung mit einem **Streamlit-GUI**, die sowohl eine **Admin-Ansicht** als auch eine **Mitglieder-Ansicht** bietet. 
-Die Anwendung nutzt **objektorientierte Programmierung** und speichert alle Daten **persistent in JSON-Dateien**. Zentral sind die meisten für die **Portfolio-Bewertung** nötigen Informationen hier in dieser Datei zu finden. Ergänzendes Material ist im Ordner `portfolio/` hinterlegt.
+Die Anwendung nutzt **objektorientierte Programmierung** und speichert alle Daten **persistent in JSON-Dateien**. Zentral sind die meisten für die **Portfolio-Bewertung** nötigen Informationen hier in dieser Datei zu finden. Ergänzendes Material ist im Ordner `portfolio/` hinterlegt. Die Schritte unter **Inbetriebnahme** können unter anderen Betriebssystemen, als Windows ggf. abweichen.
 
 ---
 
@@ -99,7 +99,7 @@ Die Anwendung simuliert ein Fitnessstudio, das von *Diego dem Hirsch* betrieben 
 - Kernfunktionen sind implementiert bis auf Kurswarteschlange/Stornierung von Buchungen
 - Update- und Löschfunktionen sind implementiert, aber aktuell noch nicht im UI verfügbar
 - Teilweise lädt der streamlit_calendar eher langsam, was zu visuellen Fehlern führen kann, die sich allerdings nach wenigen Sekunden selbst lösen
-- Kursempfehlungen können gerade nur getätigt werden, wenn durch bisherige Buchungen eine Entwicklung abzeichenbar ist (mindestens 3 Buchungen in einem Kurstyp mit nicht der gleichen Schwierigkeit, bspw. Spinning leicht, Spinning leicht, Spinning mittel)
+- Kursempfehlungen können gerade nur angezeigt werden, wenn sich durch bisherige Buchungen eine Entwicklung abzeichnet (mindestens 3 Buchungen in einem Kurstyp mit nicht der gleichen Schwierigkeit, bspw. Spinning leicht, Spinning leicht, Spinning mittel)
 
 
 ---
