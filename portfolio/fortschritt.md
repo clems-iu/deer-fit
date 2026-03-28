@@ -95,7 +95,7 @@
 
     − Software Requirements definieren
     − (Beispielhaft) Unit-Tests implementiert
-− Mindestens drei Integration-Tests implementiert und dem zugehörigen Software Requirement zuordnen
+    − Mindestens drei Integration-Tests implementiert und dem zugehörigen Software Requirement zuordnen
 − Lesbarer, strukturierter und dokumentierter Code
     − Dokumentation inklusive Nutzungsanweisung
     − Definiertes Setup in der Readme Datei beschreiben (Python Umgebung definieren, benötigte Pakete)

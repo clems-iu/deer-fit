@@ -2,7 +2,7 @@
 
 ##  Projektüberblick
 **DeerFit** ist eine Python-basierte Fitnessstudio-Verwaltungsanwendung mit einem **Streamlit-GUI**, die sowohl eine **Admin-Ansicht** als auch eine **Mitglieder-Ansicht** bietet. 
-Die Anwendung nutzt **objektorientierte Programmierung** und speichert alle Daten **persistent in JSON-Dateien**. Zentral sind die meisten für die **Portfolio-Bewertung** nötigen Informationen hier in dieser Datei zu finden. Ergänzendes Material ist im Ordner `portfolio/` hinterlegt. Die Schritte unter **Inbetriebnahme** können unter anderen Betriebssystemen, als Windows ggf. abweichen.
+Die Anwendung nutzt **objektorientierte Programmierung** und speichert alle Daten **persistent in JSON-Dateien**. Zentral sind die meisten für die **Portfolio-Bewertung** nötigen Informationen hier in dieser Datei zu finden. Ergänzendes Material ist im Ordner `portfolio/` hinterlegt. Die Schritte unter **Inbetriebnahme** können unter anderen Betriebssystemen als Windows ggf. abweichen.
 
 ---
 
