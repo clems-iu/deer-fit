@@ -1,12 +1,12 @@
 # 🦌 DeerFit – Das Fitnessstudio des Hirsches
 
-## 📌 Projektüberblick
-**DeerFit** ist eine Python-basierte Fitnessstudio-Verwaltungsanwendung mit einer **Streamlit-GUI**, die sowohl eine **Admin-Ansicht** als auch eine **Mitglieder-Ansicht** bietet. 
+##  Projektüberblick
+**DeerFit** ist eine Python-basierte Fitnessstudio-Verwaltungsanwendung mit einem **Streamlit-GUI**, die sowohl eine **Admin-Ansicht** als auch eine **Mitglieder-Ansicht** bietet. 
 Die Anwendung nutzt **objektorientierte Programmierung** und speichert alle Daten **persistent in JSON-Dateien**. Zentral sind die meisten für die **Portfolio-Bewertung** nötigen Informationen hier in dieser Datei zu finden. Ergänzendes Material ist im Ordner `portfolio/` hinterlegt.
 
 ---
 
-## 🎯 Ziel der Anwendung
+##  Ziel der Anwendung
 Die Anwendung simuliert ein Fitnessstudio, das von *Diego dem Hirsch* betrieben wird, und ermöglicht die digitale Verwaltung zentraler Studiofunktionen:
 
 - Verwaltung von Mitgliedschaften
@@ -19,39 +19,39 @@ Die Anwendung simuliert ein Fitnessstudio, das von *Diego dem Hirsch* betrieben 
 
 ---
 
-## ⚙️ Angestrebte Kernfunktionen
+##  Angestrebte Kernfunktionen
 
-### 👥 Mitgliederverwaltung
+###  Mitgliederverwaltung
 - Erstellung und Speicherung von Mitgliederdaten
 
-### 🧘 Kursmanagement
+###  Kursmanagement
 - Erstellung und Verwaltung von Kursen
 
-### 📅 Buchungssystem
+###  Buchungssystem
 - Kursanmeldungen
 - Wartelistenverwaltung
 - Stornierungen
 
-### 📈 Trainingsfortschritt
+###  Trainingsfortschritt
 - Dokumentation von Trainingsrekorden
 
-### 📊 Datenvisualisierung
+###  Datenvisualisierung
 - Darstellung von Fortschrittsverläufen
 
-### 💰 Finanzverwaltung
+###  Finanzverwaltung
 - Einnahmen:
   - Mitgliedsbeiträge
 - Ausgaben:
   - Gerätekosten
   - Trainerhonorare
 
-### 🧠 Personalisierte Trainingspläne
+###  Personalisierte Trainingspläne
 - Empfehlung basierend auf:
   - bisherigen Kursen
 
 ---
 
-## 🧱 Technische Architektur
+##  Technische Architektur
 
 ### Objektorientierte Struktur
 - Die Anwendung verwendet zentral Klassen wie:
@@ -62,7 +62,7 @@ Die Anwendung simuliert ein Fitnessstudio, das von *Diego dem Hirsch* betrieben 
     - `JsonFolderRepository`
     - `JsonListRepository`
 
-### 💾 Persistenz
+###  Persistenz
 - Speicherung aller Daten in **JSON-Dateien**
 - Kern-Struktur:
     - app/saves/
@@ -73,7 +73,7 @@ Die Anwendung simuliert ein Fitnessstudio, das von *Diego dem Hirsch* betrieben 
 
 ---
 
-## 🔐 Nutzung & Zugang
+##  Nutzung & Zugang
 
 ### Admin-Zugang
 - **Username:** `admin`
@@ -89,13 +89,13 @@ Die Anwendung simuliert ein Fitnessstudio, das von *Diego dem Hirsch* betrieben 
 - Passwort: frei wählbar (wird aktuell nicht geprüft)
 
 ### Austestbare Funktionen
-- 
+- Login als Admin oder Mitglied
 - In der Admin-Ansicht können Mitglieder, Kurse, Equipment und Finanzen verwaltet werden
 - In der User-Ansicht können Kurse gebucht und Trainingsfortschritte betrachtet, sowie hinzugefügt werden 
 
 ---
 
-## ⚠️ Aktuelle Einschränkungen und Known Bugs
+##  Aktuelle Einschränkungen und Known Bugs
 - Kernfunktionen sind implementiert bis auf Kurswarteschlange/Stornierung von Buchungen
 - Update- und Löschfunktionen sind implementiert, aber aktuell noch nicht im UI verfügbar
 - Teilweise lädt der streamlit_calendar eher langsam, was zu visuellen Fehlern führen kann, die sich allerdings nach wenigen Sekunden selbst lösen
@@ -132,11 +132,11 @@ http://localhost:8501
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ### Implementiert:
 - Pytest Einbindung zur Verwaltung der Tests
-- Unit Tests beispielhaft für zentrale Klasse: `jsonFolderRepository`
+- Unit Tests beispielhaft an zentraler Klasse: `jsonFolderRepository`
 - 3 Integrationstests
 
 
