@@ -49,17 +49,18 @@
 - Bilanzen einbauen
 - Fortschrittsmodell verallgemeinern
 - Vorhersagemodell für nächste Kurse
+- Neue Dateitrennung weiterführen und zum laufen bekommen
+- gebuchte Kurse farbig hinterlegen in user ansicht
+- Neue abstrakte Funktionen einbinden
+- Anmelden nicht über mitgliedsnummer (Erste Version fertig)
+- Aufplitten der Dateien
+
 
 # Nächste Schritte
 
-- Neue abstrakte Funktionen einbinden
-- Neue Dateitrennung weiterführen und zum laufen bekommen
-- gebuchte Kurse farbig hinterlegen in user ansicht
 - Empfehlung falls Schwierigkeit gleichbleibend
 - Button inaktiv falls schon gebucht
 - Löschfunktionen einbauen, Anmeldung löschen
-- Anmelden nicht über mitgliedsnummer (Erste Version fertig)
-- Aufplitten der Dateien
 - Einbindung logischer Folgen, neuer Kurs erfordert Verfügbarkeit von Raum oder Trainer, nur gültige Mitgliedschaften sind erlaubt
 - Vereinheitlichung der Benennungssprache von Funktionen?
 - Testing
@@ -69,6 +70,7 @@
 
 
 # Erweiterungsmöglichkeiten
+
 - Authentifikation
 - Datenbankanbindung
 - Besseres UX
@@ -91,14 +93,14 @@
 
 # Anforderungen an das Projekt
 
-− Software Requirements definieren
+    − Software Requirements definieren
     − (Beispielhaft) Unit-Tests implementiert
 − Mindestens drei Integration-Tests implementiert und dem zugehörigen Software Requirement zuordnen
 − Lesbarer, strukturierter und dokumentierter Code
-− Dokumentation inklusive Nutzungsanweisung
-− Definiertes Setup in der Readme Datei beschreiben (Python Umgebung definieren, benötigte Pakete)
-− How-to-use-app (z.B. in der Readme)
-− Welche Features wurden implementiert/teilweise implementiert/nicht umgesetzt
-− Known-Bugs
+    − Dokumentation inklusive Nutzungsanweisung
+    − Definiertes Setup in der Readme Datei beschreiben (Python Umgebung definieren, benötigte Pakete)
+    − How-to-use-app (z.B. in der Readme)
+    − Welche Features wurden implementiert/teilweise implementiert/nicht umgesetzt
+    − Known-Bugs
 − Software Design Diagramme (z.B. Use-Case, Sequenzdiagramm)
-− CI-Pipeline dokumentiert (Befehlsreihenfolge, requirements.txt)
+    − CI-Pipeline dokumentiert (Befehlsreihenfolge, requirements.txt)

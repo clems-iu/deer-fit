@@ -1,59 +1,146 @@
-# Aufgabe 8: DeerFit – Das Fitnessstudio des Hirsches
+# 🦌 DeerFit – Das Fitnessstudio des Hirsches
 
-## Idee
-Ein Streamlit GUI mit einer Admin- und Mitglieder-Ansicht zur Verwaltung eines Fitnessstudios, dessen Daten objektorientiert verwaltet und in json-Dateien gespeichert werden. 
+## 📌 Projektüberblick
+**DeerFit** ist eine Python-basierte Fitnessstudio-Verwaltungsanwendung mit einer **Streamlit-GUI**, die sowohl eine **Admin-Ansicht** als auch eine **Mitglieder-Ansicht** bietet. 
+Die Anwendung nutzt **objektorientierte Programmierung** und speichert alle Daten **persistent in JSON-Dateien**. Zentral sind die meisten für die **Portfolio-Bewertung** nötigen Informationen hier in dieser Datei zu finden. Ergänzendes Material ist im Ordner `portfolio/` hinterlegt.
 
-## Aufgabe
-Erstelle eine Python-basierte Anwendung, in der Diego, der Hirsch, ein Fitnessstudio auf der Waldlichtung eröffnet und Code verwendet, um:
+---
 
-- Mitgliedschaften zu verwalten (Tiernamen, Mitgliedschaftstyp, Ablaufdatum)
-- Kurspläne zu erstellen (Yoga, Krafttraining, Ausdauerlauf, Schwimmkurse)
-- Kursbuchungen abzuwickeln (Anmeldungen, Wartelisten, Absagen)
-- Trainingsfortschritte zu dokumentieren (Gewicht, Ausdauer, persönliche Rekorde)
-- Gewinne und Ausgaben zu erfassen (Mitgliedsbeiträge, Gerätekosten, Trainerhonorare)
-- Fitnessberichte zu visualisieren (Fortschrittskurven der letzten Monate)
-- Klassen für Mitglieder, Kurse, Trainer und Geräte zu verwenden
-- Personalisierte Trainingspläne zu empfehlen (basierend auf Zielen und Fortschritt) 
+## 🎯 Ziel der Anwendung
+Die Anwendung simuliert ein Fitnessstudio, das von *Diego dem Hirsch* betrieben wird, und ermöglicht die digitale Verwaltung zentraler Studiofunktionen:
 
-## Informationen für die Nutzung
-- Die Login-Informationen für die Admin-Sicht sind username: admin, passwort: admin
-- Die Anmeldung für User läuft über die Eingabe des Vor- und Nachnamens als username und ein beliebiges Passwort
-    - Beispielsweise ein User mit hinterlegten Testdaten, dessen Nutzung sich anbieten würde wäre:
-        - Username: Rudy Rentier
-        - Passwort: beliebige Zeichenkette 
-- Die Speicherung von Daten ist persistent, also werden getätigte Aktionen, wie beispielsweise Buchungen für zukünftige Sessions gespeichert
-- Sowohl Kurs-, als auch Userdaten sind in Ordnern, der ihre id tragen im jeweiligen Ordner unter app/saves hinterlegt
-- Aktuell können nur Daten hinzugefügt werden, die Löschung / das Updaten von Daten sind technisch vorhanden, konnten aber zeitlich nicht mehr ins UI eingebunden werden 
-- Testing ist anhand von Unittests und Integrationstests implementiert, Unittests beispielhaft anhand der zentralen Klasse jsonFolderRepository
+- Verwaltung von Mitgliedschaften
+- Planung und Organisation von Kursen
+- Buchungssystem inkl. Wartelisten
+- Tracking von Trainingsfortschritten
+- Finanzübersicht (Einnahmen & Ausgaben)
+- Visualisierung von Fitnessdaten
+- Personalisierte Trainingspläne
+
+---
+
+## ⚙️ Angestrebte Kernfunktionen
+
+### 👥 Mitgliederverwaltung
+- Erstellung und Speicherung von Mitgliederdaten
+
+### 🧘 Kursmanagement
+- Erstellung und Verwaltung von Kursen
+
+### 📅 Buchungssystem
+- Kursanmeldungen
+- Wartelistenverwaltung
+- Stornierungen
+
+### 📈 Trainingsfortschritt
+- Dokumentation von Trainingsrekorden
+
+### 📊 Datenvisualisierung
+- Darstellung von Fortschrittsverläufen
+
+### 💰 Finanzverwaltung
+- Einnahmen:
+  - Mitgliedsbeiträge
+- Ausgaben:
+  - Gerätekosten
+  - Trainerhonorare
+
+### 🧠 Personalisierte Trainingspläne
+- Empfehlung basierend auf:
+  - bisherigen Kursen
+
+---
+
+## 🧱 Technische Architektur
+
+### Objektorientierte Struktur
+- Die Anwendung verwendet zentral Klassen wie:
+    - `Mitglied`
+    - `Kurs`
+    - `Equipment`
+- Und zentral zur internen Verwaltung der json-Dateien Klassen wie:
+    - `JsonFolderRepository`
+    - `JsonListRepository`
+
+### 💾 Persistenz
+- Speicherung aller Daten in **JSON-Dateien**
+- Kern-Struktur:
+    - app/saves/
+        - ├── user_data/<user_id>/
+        - └── studio_data/kurse/<kurs_id>/
+
+- Daten bleiben auch nach Neustart erhalten
+
+---
+
+## 🔐 Nutzung & Zugang
+
+### Admin-Zugang
+- **Username:** `admin`
+- **Passwort:** `admin`
+
+### Benutzer-Login
+- Login erfolgt über:
+- Vorname + Nachname als Username
+- beliebiges Passwort
+
+**Beispiel-Testnutzer:**
+- Username: `Rudy Rentier`
+- Passwort: frei wählbar (wird aktuell nicht geprüft)
+
+### Austestbare Funktionen
+- 
+- In der Admin-Ansicht können Mitglieder, Kurse, Equipment und Finanzen verwaltet werden
+- In der User-Ansicht können Kurse gebucht und Trainingsfortschritte betrachtet, sowie hinzugefügt werden 
+
+---
+
+## ⚠️ Aktuelle Einschränkungen und Known Bugs
+- Kernfunktionen sind implementiert bis auf Kurswarteschlange/Stornierung von Buchungen
+- Update- und Löschfunktionen sind implementiert, aber aktuell noch nicht im UI verfügbar
+- Teilweise lädt der streamlit_calendar eher langsam, was zu visuellen Fehlern führen kann, die sich allerdings nach wenigen Sekunden selbst lösen
+- Kursempfehlungen können gerade nur getätigt werden, wenn durch bisherige Buchungen eine Entwicklung abzeichenbar ist (mindestens 3 Buchungen in einem Kurstyp mit nicht der gleichen Schwierigkeit, bspw. Spinning leicht, Spinning leicht, Spinning mittel)
 
 
-## Voraussetzungen
-- Python 3.8+
-- Abhängigkeiten in `requirements.txt`
+---
 
-## Installation
-1. Projektordner in einem Terminal öffnen. 
-2. Nach Bedarf eine lokale Environment für Installation erstellen:
+## Inbetriebnahme
 
+###  Voraussetzungen
+- Python: Version 3.8 oder höher
+- Abhängigkeiten: siehe requirements.txt
+
+###  Installation
+1. Projektordner im Terminal öffnen
+2. (Optional) Virtuelle Umgebung erstellen:
 ```bash
 python3 -m venv .venv
 .venv\Scripts\Activate.ps1
 ```
-3. Installation der nötigen Pakete:
+3. Abhängigkeiten installieren:
 ```bash
 pip install -r requirements.txt
 ```
 
-## Start
+###  Anwendung starten
 ```bash
 streamlit run main.py
 ```
 
-Die Web-App ist standardmäßig unter http://localhost:8501 erreichbar.
+➡️ Die Anwendung ist anschließend erreichbar unter:
+http://localhost:8501
 
-## Testing
-Im Projektordner folgendes ausführen:
+---
 
+## 🧪 Testing
+
+### Implementiert:
+- Pytest Einbindung zur Verwaltung der Tests
+- Unit Tests beispielhaft für zentrale Klasse: `jsonFolderRepository`
+- 3 Integrationstests
+
+
+### Ausführen:
 ```bash
-pytest 
+pytest
 ```
