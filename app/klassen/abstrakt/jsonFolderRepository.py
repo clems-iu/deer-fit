@@ -1,3 +1,17 @@
+
+# Erwartete Struktur:
+
+# base_path/
+#     folder1/
+#       details.json
+#     folder2/
+#       details.json
+#     ...
+
+# Die Klasse erzeugt eine Liste von T-Objekten, indem sie in jedem
+# Unterordner die angegebene JSON-Datei (z.B. 'details.json') lädt.
+
+
 import json
 from pathlib import Path
 from typing import Type, TypeVar, Generic, List, Callable, Any, Optional
@@ -6,19 +20,7 @@ T = TypeVar("T")
 
 
 class JsonFolderRepository(Generic[T]):
-    """
-    Erwartete Struktur:
 
-    base_path/
-      folder1/
-        details.json
-      folder2/
-        details.json
-      ...
-
-    Die Klasse erzeugt eine Liste von T-Objekten, indem sie in jedem
-    Unterordner die angegebene JSON-Datei (z.B. 'details.json') lädt.
-    """
 
     def __init__(
         self,
@@ -57,6 +59,7 @@ class JsonFolderRepository(Generic[T]):
         return detail_files
 
     def _load(self) -> None:
+        """Lädt alle Items aus den 'details.json'-Dateien in den Unterordnern."""
         self._items = []
         detail_files = self._iter_detail_files()
         for file_path in detail_files:
@@ -74,17 +77,19 @@ class JsonFolderRepository(Generic[T]):
     # ---------- CRUD-Operationen im Speicher ----------
 
     def list_all(self) -> List[T]:
+        """Gibt alle geladenen Items zurück. """
         return list(self._items)
 
     def get(self, predicate: Callable[[T], bool]) -> Optional[T]:
+        """Sucht ein Item, das die Bedingung erfüllt. """
         for item in self._items:
             if predicate(item):
                 return item
         return None
 
     def add(self, item: T, folder_name: str) -> T:
+        """Fügt ein neues Item hinzu und speichert es in einem neuen Ordner. """
         self._items.append(item)
-        # Erstellt Ordner aus folder_name und speichert in details_filename
         folder_path = self._base_path / folder_name
         folder_path.mkdir(parents=True, exist_ok=True)
         details_path = folder_path / self._details_filename
@@ -93,14 +98,14 @@ class JsonFolderRepository(Generic[T]):
         return item
 
     def delete(self, predicate: Callable[[T], bool], folder_name: str) -> bool:
+        """Löscht das erste Element, das predicate(item) == True erfüllt, und den zugehörigen Ordner. """
         for idx, item in enumerate(self._items):
             if predicate(item):
                 del self._items[idx]
-                # Optional: Ordner löschen, wenn du möchtest
                 folder_path = self._base_path / folder_name
                 if folder_path.exists() and folder_path.is_dir():
                     for child in folder_path.iterdir():
-                        child.unlink()  # Löscht alle Dateien im Ordner
-                    folder_path.rmdir()  # Löscht den Ordner selbst
+                        child.unlink()  
+                    folder_path.rmdir()  
                 return True
         return False

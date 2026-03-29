@@ -1,8 +1,10 @@
+# Diese Klasse kümmert sich um die Authentifizierung der Nutzer. 
+# Sie prüft die Mitgliedsnummer und das Passwort, sowie die Gültigkeit der Mitgliedschaft anhand der Daten in der user.json Datei. 
+# Es gibt eine spezielle Behandlung für den Admin-Login.
+
 import json
 import os
 from datetime import date, datetime
-
-# Anmeldedaten für die DeerFit Anwendung
 
 
 class Authenticator:
@@ -13,6 +15,7 @@ class Authenticator:
         self.mitgliedsnummer = None
 
     def _mitgliedschaft_ist_gueltig(self, user_json_path: str) -> bool:
+        """Prüft, ob die Mitgliedschaft gültig ist, basierend auf den Daten in der user.json Datei."""
         with open(user_json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
@@ -31,7 +34,7 @@ class Authenticator:
         return start <= heute <= ende
 
     def login(self, mitgliedsnummer, password):
-
+        """Versucht, den Nutzer mit der angegebenen Mitgliedsnummer und Passwort einzuloggen."""
         if mitgliedsnummer == "admin" and password == "admin":
             self.authenticated = True
             self.role = "admin"
@@ -69,6 +72,7 @@ class Authenticator:
             return "Erfolgreich eingeloggt"
 
     def logout(self):
+        """Loggt den Nutzer aus und setzt die Authentifizierungsinformationen zurück."""
         self.authenticated = False
         self.role = None
         self.mitgliedsnummer = None

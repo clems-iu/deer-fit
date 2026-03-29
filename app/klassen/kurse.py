@@ -1,8 +1,8 @@
-# Enthält die Klassen für Kurse, Kurstermine und Kurspläne im Deer-Fit System.
+# Enthält die Klassen für Kurse und Kurstermine im Deer-Fit System.
 
 import uuid
 
-
+# Die Klasse "Kurs" repräsentiert einen Kurs mit seinen Eigenschaften wie Name, Beschreibung, Dauer, etc.
 class Kurs:
     def __init__(
         self,
@@ -53,6 +53,7 @@ class Kurs:
         }
 
 
+# Die Klasse "Kurstermin" repräsentiert einen spezifischen Termin für einen Kurs, inklusive Datum, Uhrzeit und angemeldeten Teilnehmern.
 class Kurstermin:
     def __init__(self, datum, uhrzeit, kursId, kursbuchungen=[], id=None, kurs={}):
         if id is None:
@@ -68,6 +69,7 @@ class Kurstermin:
         self.kurs = kurs  # Kursdetails, z.B. Name, Beschreibung, Dauer, etc.
 
     def teilnehmer_hinzufuegen(self, mitgliedsnummer):
+        """Fügt einen Teilnehmer zum Kurstermin hinzu, wenn die maximale Teilnehmerzahl nicht überschritten wird."""
         if len(self.kursbuchungen) < self.kurs.max_teilnehmer:
             self.kursbuchungen.append(mitgliedsnummer)
         else:
@@ -94,20 +96,3 @@ class Kurstermin:
             "uhrzeit": self.uhrzeit,
             "kursbuchungen": self.kursbuchungen,
         }
-
-
-class Kursplan:
-    def __init__(self, start, end, kurstermine=[]):
-        self.start = start  # Startdatum des Kursplans
-        self.end = end  # Enddatum des Kursplans
-        self.kurstermine = kurstermine  # Liste der Kurstermine im Kursplan
-
-    def kurstermin_hinzufuegen(self, kurstermin):
-        self.kurstermine.append(kurstermin)
-
-    def kurstermin_entfernen(self, kurstermin):
-        self.kurstermine.remove(kurstermin)
-
-    def alle_termine_anzeigen(self):
-        for kurstermin in self.kurstermine:
-            print(kurstermin)

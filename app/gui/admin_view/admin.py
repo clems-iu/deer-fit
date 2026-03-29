@@ -8,8 +8,6 @@ from app.klassen.intern.dataSaver import DataSaver
 
 
 def show_admin():
-	dl = DataLoader()
-	ds = DataSaver()
 
 	st.markdown(
 		"""

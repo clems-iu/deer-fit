@@ -1,9 +1,7 @@
 # Enthält die Klassen für Mitglieder, Trainingsfortschritte und Mitgliedschaften im Deer-Fit System.
 
-
+# Die Mitgliedsklasse repräsentiert ein Mitglied des Fitnessstudios, einschließlich persönlicher Informationen, Trainingsfortschritt und Mitgliedschaftsdaten.
 class Mitglied:
-
-    # Selectbox mit den Trainingszielen: Allgemein, Muskelaufbau, Abnehmen, Beweglichkeit ->
 
     def __init__(
         self,
@@ -16,9 +14,7 @@ class Mitglied:
         self.vorname = vorname
         self.nachname = nachname
         if mitgliedsnummer is None:
-            self.mitgliedsnummer = self.name_to_id(
-                self.vorname + " " + self.nachname
-            )  # Generiert eine eindeutige Mitgliedsnummer
+            self.mitgliedsnummer = self.name_to_id(self.vorname + " " + self.nachname)
         else:
             self.mitgliedsnummer = mitgliedsnummer
         self.trainingsfortschritt = trainingsfortschritt
@@ -29,34 +25,33 @@ class Mitglied:
             f"{self.vorname} {self.nachname} (Mitgliedsnummer: {self.mitgliedsnummer})"
         )
 
-    def trainingsfortschritt_hinzufuegen(self, fortschritt):
-        self.trainingsfortschritt.append(fortschritt)
-
     def name_to_id(self, name: str) -> int:
-        # Name in Bytes (UTF-8)
+        """Generiert eine eindeutige ID basierend auf dem Namen des Mitglieds."""
         b = name.encode("utf-8")
-        # Bytes als große Zahl interpretieren
         return int.from_bytes(b, byteorder="big")
-    
+
     def from_dict(data: dict) -> "Mitglied":
         return Mitglied(
             vorname=data["vorname"],
             nachname=data["nachname"],
-            trainingsfortschritt=[Trainingsfortschritt.from_dict(tf) for tf in data.get("trainingsfortschritt", [])],
+            trainingsfortschritt=[
+                Trainingsfortschritt.from_dict(tf)
+                for tf in data.get("trainingsfortschritt", [])
+            ],
             mitgliedschaft=data.get("mitgliedschaft", {}),
-            mitgliedsnummer=data.get("mitgliedsnummer")
+            mitgliedsnummer=data.get("mitgliedsnummer"),
         )
-        
+
     def to_dict(self) -> dict:
         return {
             "vorname": self.vorname,
             "nachname": self.nachname,
             "trainingsfortschritt": [tf.to_dict() for tf in self.trainingsfortschritt],
             "mitgliedschaft": self.mitgliedschaft,
-            "mitgliedsnummer": self.mitgliedsnummer
+            "mitgliedsnummer": self.mitgliedsnummer,
         }
 
-
+# Die Trainingsfortschritt-Klasse repräsentiert den Fortschritt eines Mitglieds bei einer bestimmten Übung, einschließlich Datum, Übung, Bestleistung, Einheit und Wiederholungen.
 class Trainingsfortschritt:
     def __init__(self, datum, übung, best, einheit, reps):
         self.datum = datum
@@ -84,6 +79,7 @@ class Trainingsfortschritt:
         }
 
 
+# Die Mitgliedschaft-Klasse repräsentiert die Art der Mitgliedschaft eines Mitglieds, einschließlich des Typs, Start- und Enddatums.
 class Mitgliedschaft:
     def __init__(self, typ, startdatum, enddatum):
         self.typ = typ
