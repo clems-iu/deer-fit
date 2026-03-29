@@ -3,6 +3,6 @@ import logging
 
 def setup_logging():
     logging.basicConfig(
-        level=logging.DEBUG,
+        level=logging.WARNING, # Standard-Log-Level auf WARNING setzen, um weniger detaillierte Logs in Produktion zu erhalten
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
