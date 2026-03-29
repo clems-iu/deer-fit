@@ -1,3 +1,7 @@
+# Unter diesem Modul werden die Funktionen für die Kursbuchung und das Empfehlungssystem implementiert.
+# Es werden die Kurstermine geladen, die Buchungen des Nutzers ermittelt und basierend auf den bisherigen Buchungen personalisierte Empfehlungen generiert.
+# Außerdem wird ein Kalender mit den verfügbaren Terminen angezeigt, in dem der Nutzer direkt buchen kann.
+
 import logging
 from typing import Optional
 
@@ -10,8 +14,6 @@ from catboost import CatBoostClassifier
 import numpy as np
 from datetime import datetime
 
-from app.klassen.intern.dataLoader import DataLoader
-from app.klassen.intern.dataSaver import DataSaver
 from app.klassen.kurse import Kurs, Kurstermin
 
 logger = logging.getLogger(__name__)
@@ -29,6 +31,10 @@ def get_kurseRepo() -> JsonFolderRepository:
 
 
 def get_kurstermineRepo(kurs_id: Optional[str] = None) -> JsonFolderRepository:
+    """Wenn kein kurs_id übergeben wird, werden alle Kurstermine aus allen Kursen geladen.
+    Wenn eine kurs_id übergeben wird, werden nur die Kurstermine für diesen Kurs geladen.
+    """
+    
     if not kurs_id:
         return JsonFolderRepository(
             base_path=f"studio_data/kurse/",
@@ -48,11 +54,13 @@ def get_kurstermineRepo(kurs_id: Optional[str] = None) -> JsonFolderRepository:
 
 
 def get_all_kurstermine():
+    """Lädt alle Kurstermine aus allen Kursen und ergänzt sie um den optionalen Parameter kurs"""
     termine_repo = get_kurstermineRepo()
     termine = termine_repo.list_all()
     kurs_repo = get_kurseRepo()
     kurs_repos = kurs_repo.list_all()
-    # Ergänzung der termine um den optional Parameter kurs, den man über die kursId zuordnen kann
+    
+    # Ergänzung der Termine um den optionalen Parameter kurs
     for termin in termine:
         try:
             kurs_id = getattr(termin, "kursId", None)
@@ -79,6 +87,8 @@ def get_all_kurstermine():
 
 
 def get_user_buchungen():
+    """Lädt alle Kurstermine, prüft die Kursbuchungen und gibt eine Liste der gebuchten Termine für das aktuelle Mitglied zurück."""
+    
     buchungen = []
     if st.session_state.mitgliedsnummer:
         kurse_repo = get_kurseRepo()
@@ -280,8 +290,11 @@ def get_kursempfehlungen():
 
 
 def show_kursbuchungen():
+    """Zeigt die Kursbuchungsseite mit Kalender und Empfehlungen an."""
+    
     st.subheader("Kurs-Termine buchen")
     user_id = str(st.session_state.mitgliedsnummer)
+    
     # Empfehlungen anzeigen
     empfehlungen = get_kursempfehlungen()
     if empfehlungen:
@@ -293,7 +306,6 @@ def show_kursbuchungen():
                 f"**{kurs.name}** ({kurs.typ}, Schwierigkeit: {kurs.schwierigkeitsgrad})<br>Nächster Termin: {emp['datum']} um {emp['uhrzeit']}",
                 unsafe_allow_html=True,
             )
-            # Buchungsbutton direkt für Empfehlung
 
             schon_gebucht = user_id in getattr(termin, "kursbuchungen", [])
             max_teilnehmer = getattr(termin.kurs, "max_teilnehmer", 0)
@@ -342,7 +354,6 @@ def show_kursbuchungen():
         st.error("Fehler beim Laden der Kurstermine.")
         return
 
-    # Event Liste für Kalender erstellen und dabei aus Kursdauer und Kurstermin Uhrzeit ein Enddatum erstellen, damit die Termine im Kalender korrekt angezeigt werden
     events = [
         {
             "id": t.id,
@@ -351,7 +362,7 @@ def show_kursbuchungen():
             "end": f"{t.datum}T{t.uhrzeit}:00",
             "color": (
                 "green" if user_id in t.kursbuchungen else "blue"
-            ),  # Grün, wenn der Nutzer schon gebucht hat, sonst Blau
+            ), 
         }
         for t in termine
     ]
@@ -371,6 +382,7 @@ def show_kursbuchungen():
         st.error("Fehler beim Anzeigen des Kalenders.")
         return
 
+    # Verarbeitung der Kalender-Event-Auswahl    
     if selected and selected.get("callback") == "eventClick":
         logger.info(f"Kalender-Event ausgewählt: {selected['eventClick']['event']}")
         st.session_state.selected_event = selected["eventClick"]["event"]
@@ -403,16 +415,14 @@ def show_kursbuchungen():
                 f"Passenden Kurstermin gefunden: {kurstermin.uhrzeit} (ID: {kurstermin.id})"
             )
             try:
-                st.markdown(
-                    f"""
+                st.markdown(f"""
 					### 🧭 **{kurs.name}**
 					**Datum:** {kurstermin.datum}  
 					**Uhrzeit:** {kurstermin.uhrzeit}  
 					**Beschreibung:** {kurs.beschreibung}  
 					**Dauer:** {kurs.dauer} Minuten 
 					**Schwierigkeitsgrad:** {kurs.schwierigkeitsgrad}
-					"""
-                )
+					""")
             except Exception as e:
                 logger.error(
                     f"Fehler beim Anzeigen der Kursdetails: {e}", exc_info=True
@@ -420,7 +430,6 @@ def show_kursbuchungen():
                 st.error("Fehler beim Anzeigen der Kursdetails.")
                 return
 
-            # Prüfe, ob schon gebucht
             try:
                 schon_gebucht = user_id in getattr(kurstermin, "kursbuchungen", [])
                 logger.info(

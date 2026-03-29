@@ -5,27 +5,23 @@ import streamlit as st
 from app.klassen.intern.authenticator import Authenticator
 
 logger = logging.getLogger(__name__)
-if not logger.hasHandlers():
-	logging.basicConfig(
-		level=logging.DEBUG, format="%(asctime)s %(levelname)s %(name)s: %(message)s"
-	)
+
 
 def name_to_id(name: str) -> int:
-		# Name in Bytes (UTF-8)
-		b = name.encode("utf-8")
-		# Bytes als große Zahl interpretieren
-		return int.from_bytes(b, byteorder="big")
+	"""Konvertiert einen Namen in eine eindeutige Ganzzahl (Mitgliedsnummer)."""
+	b = name.encode("utf-8")
+	return int.from_bytes(b, byteorder="big")
+
 
 def id_to_name(member_id: int) -> str:
-	# Minimale Byte-Länge bestimmen
+	"""Konvertiert eine Mitgliedsnummer in einen Namen."""
 	length = (member_id.bit_length() + 7) // 8
 	b = member_id.to_bytes(length, byteorder="big")
 	return b.decode("utf-8")
-	
+
+
 def show_login():
-
-
-	# mittlere von 3 Spalten nutzen (1/3 der Fläche)
+	"""Zeigt die Login-Seite an und verarbeitet die Login-Logik."""
 	col_left, col_center, col_right = st.columns([1, 1, 1])
 	with col_center:
 		with st.container():

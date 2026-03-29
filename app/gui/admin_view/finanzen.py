@@ -1,3 +1,5 @@
+# Finanzen-Übersicht für den aktuellen Monat
+
 import calendar
 import datetime
 import pandas as pd
@@ -27,12 +29,14 @@ def get_mitgliederRepo():
     )
 
 def finanzen_section():
+    """Zeigt die Kosten- und Einkünfteübersicht für den aktuellen Monat an."""
     st.markdown('<div class="subtitle">💶 Kostenübersicht (Monat)</div>', unsafe_allow_html=True)
 
     heute = datetime.date.today()
     aktueller_monat = heute.month
     aktuelles_jahr = heute.year
 
+    # Auswertung der Kosten
     equipmentRepo = get_equipmentRepo()
     equipment_liste = equipmentRepo.list_all()
     kosten_summe = 0
@@ -58,6 +62,7 @@ def finanzen_section():
                 'kosten': kosten
             })
 
+    # Auswertung der Einkünfte
     mitgliederRepo= get_mitgliederRepo()
     userliste = mitgliederRepo.list_all()
     einkuenfte_summe = 0
@@ -65,7 +70,6 @@ def finanzen_section():
 
     heute = datetime.date.today()
 
-    # Ersten und letzten Tag des aktuellen Monats bestimmen
     first_of_month = heute.replace(day=1)
     last_day = calendar.monthrange(heute.year, heute.month)[1]
     last_of_month = heute.replace(day=last_day)
@@ -82,8 +86,6 @@ def finanzen_section():
         except Exception:
             continue
 
-        # Prüfen, ob die Mitgliedschaft in den aktuellen Monat hineinragt
-        # (Intervalle [start_dt, ende_dt] und [first_of_month, last_of_month] überschneiden sich)
         if start_dt <= last_of_month and ende_dt >= first_of_month:
             if typ == 'Basis':
                 beitrag = 20
@@ -100,6 +102,8 @@ def finanzen_section():
                 'beitrag': beitrag
             })
 
+    # Darstellung der Tabelle der Kosten und Einkünfte
+    
     kosten_df = pd.DataFrame(kosten_zeilen)
     eink_df = pd.DataFrame(einkunft_zeilen)
     max_len = max(len(kosten_df), len(eink_df)) if max(len(kosten_df), len(eink_df)) > 0 else 0

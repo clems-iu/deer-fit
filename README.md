@@ -104,6 +104,16 @@ Die Anwendung simuliert ein Fitnessstudio, das von *Diego dem Hirsch* betrieben 
 
 ---
 
+## Erweiterungsmöglichkeiten
+- Mehrsprachigkeit
+- Mobile Ansicht
+- Verwaltung der Trainer-Anwesenheiten und Abrechnung dementsprechend
+- Export der Abrechnung und Einsehen alter Abrechnungen
+- Auswertung der Kursnachfrage für Zukunftsplanung von Kursterminen 
+
+
+---
+
 ## Inbetriebnahme
 
 ###  Voraussetzungen

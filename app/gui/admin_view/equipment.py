@@ -1,8 +1,10 @@
-import uuid
+# Admin-View für die Verwaltung von Equipment
+
 import streamlit as st
 
 from app.klassen.abstrakt.jsonListRepository import JsonListRepository
 from app.klassen.equipment import Equipment
+
 
 def get_equipmentRepo():
     return JsonListRepository(
@@ -12,8 +14,13 @@ def get_equipmentRepo():
         to_dict=Equipment.to_dict,
     )
 
+
 def equipment_section():
-    st.markdown('<div class="subtitle">🛠️ Equipment Übersicht</div>', unsafe_allow_html=True)
+    """Zeigt die Übersicht aller Equipments an und ermöglicht das Hinzufügen von neuem Equipment."""
+
+    st.markdown(
+        '<div class="subtitle">🛠️ Equipment Übersicht</div>', unsafe_allow_html=True
+    )
     equipmentRepo = get_equipmentRepo()
     equipment_liste = equipmentRepo.list_all()
 
@@ -28,13 +35,15 @@ def equipment_section():
                 f"Kosten: {eq.kosten} EUR | "
                 f"Wiederkehrend: {eq.sindKostenWiederkehrend}</span>"
                 f"</div>",
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
     neues_equipment_form(equipmentRepo)
 
 
 def neues_equipment_form(repo):
+    """Formular zum Hinzufügen von neuem Equipment."""
+    
     with st.expander("➕ Neues Equipment hinzufügen", expanded=False):
         with st.form("add_equipment_form"):
             eq_name = st.text_input("Name")
@@ -48,7 +57,7 @@ def neues_equipment_form(repo):
                     name=eq_name,
                     anschaffungsdatum=str(eq_datum),
                     kosten=eq_kosten,
-                    sindKostenWiederkehrend=eq_wiederkehrend
+                    sindKostenWiederkehrend=eq_wiederkehrend,
                 )
                 if repo.add(eq_data):
                     st.success(f"Equipment {eq_name} wurde angelegt.")

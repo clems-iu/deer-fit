@@ -1,3 +1,5 @@
+# Kurse und Termine Verwaltung für das Fitnessstudio
+
 import uuid
 from typing import Optional
 import streamlit as st
@@ -6,7 +8,6 @@ from app.klassen.abstrakt.jsonListRepository import JsonListRepository
 from streamlit_calendar import calendar
 from app.klassen.kurse import Kurs, Kurstermin
 import logging
-
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +24,11 @@ def get_kurseRepo() -> JsonFolderRepository:
 
 
 def kurse_section():
-    st.markdown('<div class="subtitle">🏋️ Kurse Übersicht</div>', unsafe_allow_html=True)
+    """Zeigt die Übersicht aller Kurse an und ermöglicht das Anlegen neuer Kurse."""
+
+    st.markdown(
+        '<div class="subtitle">🏋️ Kurse Übersicht</div>', unsafe_allow_html=True
+    )
     kurseRepo = get_kurseRepo()
     kursliste = kurseRepo.list_all()
 
@@ -45,6 +50,8 @@ def kurse_section():
 
 
 def neuer_kurs_form(repo):
+    """Formular zum Anlegen eines neuen Kurses."""
+
     with st.expander("➕ Neuen Kurs anlegen", expanded=False):
         with st.form("add_course_form"):
             kurs_name = st.text_input("Kursname")
@@ -71,6 +78,7 @@ def neuer_kurs_form(repo):
 
 
 def get_kurstermineRepo(kurs_id: Optional[str] = None) -> JsonFolderRepository:
+    """Gibt das Repository für alle Kurstermine zurück. Wenn kurs_id angegeben ist, wird das Repository für die Termine eines bestimmten Kurses zurückgegeben."""
     if not kurs_id:
         return JsonFolderRepository(
             base_path=f"studio_data/kurse/",
@@ -90,25 +98,29 @@ def get_kurstermineRepo(kurs_id: Optional[str] = None) -> JsonFolderRepository:
 
 
 def kalender_section():
+    """Zeigt einen Kalender mit allen Kursterminen an und ermöglicht das Anlegen neuer Termine."""
+    
     st.markdown(
         '<div class="subtitle">📅 Kurs-Termine Kalender</div>', unsafe_allow_html=True
     )
 
     kurseRepo = get_kurseRepo()
     kursliste = kurseRepo.list_all()
-    
+
     termineRepo = get_kurstermineRepo()
     termineliste = termineRepo.list_all()
-    
+
     all_events = []
     kurse_by_id = {kurs.id: kurs for kurs in kursliste}
-    
+
     for termin in termineliste:
         kurs = kurse_by_id.get(termin.kursId)
         if kurs is None:
-            logger.info(f"Termin {termin.id} verweist auf unbekannten Kurs {termin.kursId}")
+            logger.info(
+                f"Termin {termin.id} verweist auf unbekannten Kurs {termin.kursId}"
+            )
             continue  # Überspringt Termine ohne gültigen Kurs
-            
+
         all_events.append(
             {
                 "id": f"{termin.kursId}-{termin.id}",
@@ -145,6 +157,8 @@ def kalender_section():
 
 
 def neuer_termin_form(kursliste):
+    """Formular zum Anlegen eines neuen Kurstermins."""
+
     with st.expander("➕ Neuen Kurstermin hinzufügen", expanded=False):
         with st.form("add_termin_form"):
             kurs_names = [str(k.name) for k in kursliste]

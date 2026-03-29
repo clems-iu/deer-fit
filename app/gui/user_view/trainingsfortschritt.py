@@ -1,3 +1,5 @@
+# Visualisiert die Trainingsfortschritte eines Mitglieds und ermöglicht das Hinzufügen neuer Fortschritte.
+
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -24,6 +26,7 @@ def load_trainingsfortschritte(mitgliedsnummer: str):
 
 
 def normalize_fortschritte(fortschritte):
+    """Normalisiert die Trainingsfortschritte in ein DataFrame, unabhängig davon, ob sie als dicts oder Objekte vorliegen."""
     daten = []
     for eintrag in fortschritte:
         if isinstance(eintrag, dict):
@@ -50,6 +53,7 @@ def normalize_fortschritte(fortschritte):
 
 
 def visualize_user_trainingsfortschritt(mitgliedsnummer: str):
+    """Lädt die Trainingsfortschritte eines Mitglieds, normalisiert die Daten und visualisiert sie mit Matplotlib."""
     fortschritte = load_trainingsfortschritte(mitgliedsnummer)
 
     if not fortschritte:
@@ -133,6 +137,8 @@ def visualize_user_trainingsfortschritt(mitgliedsnummer: str):
 
 
 def add_trainingsfortschritt_form(mitgliedsnummer: str):
+    """Zeigt ein Formular zum Hinzufügen eines neuen Trainingsfortschritts an und speichert die Daten im Repository."""
+    
     st.markdown("---")
     st.subheader("Neuen Trainingsfortschritt hinzufügen")
 
@@ -155,6 +161,8 @@ def add_trainingsfortschritt_form(mitgliedsnummer: str):
 
 
 def show_trainingsfortschritt():
+    """Hauptfunktion, die den Trainingsfortschritt anzeigt und das Formular zum Hinzufügen neuer Fortschritte bereitstellt."""
+    
     st.subheader("Trainingsfortschritt")
 
     mitgliedsnummer = st.session_state.get("mitgliedsnummer")

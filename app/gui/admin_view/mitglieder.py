@@ -1,3 +1,5 @@
+# Mitgliederverwaltung im Admin-Bereich
+
 import streamlit as st
 from app.klassen.mitglieder import Mitglied
 from app.klassen.abstrakt.jsonFolderRepository import JsonFolderRepository
@@ -15,6 +17,8 @@ def get_mitgliederRepo():
 
 
 def mitglieder_section():
+    """Zeigt die Mitgliederübersicht an und ermöglicht das Anlegen neuer Mitglieder."""
+
     st.markdown(
         '<div class="subtitle">👥 Mitglieder Übersicht</div>', unsafe_allow_html=True
     )
@@ -40,6 +44,8 @@ def mitglieder_section():
 
 
 def neues_mitglied_form(repo):
+    """Formular zum Anlegen eines neuen Mitglieds."""
+
     with st.expander("➕ Neues Mitglied anlegen", expanded=False):
         with st.form("add_user_form"):
             vorname = st.text_input("Vorname")
