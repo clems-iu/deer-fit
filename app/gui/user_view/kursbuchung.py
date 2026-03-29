@@ -316,7 +316,7 @@ def show_kursbuchungen():
                 st.warning("Kurs ist voll!")
             else:
                 if st.button(
-                    f"Empfohlenen Termin buchen: {kurs['name']} {emp['datum']} {emp['uhrzeit']}"
+                    f"Empfohlenen Termin buchen: {kurs.name} {emp['datum']} {emp['uhrzeit']}"
                 ):
                     try:
                         kurstermin.teilnehmer_hinzufuegen(user_id)

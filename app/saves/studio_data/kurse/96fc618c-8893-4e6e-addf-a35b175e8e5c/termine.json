@@ -15,5 +15,19 @@
     "datum": "2026-03-27",
     "uhrzeit": "16:00",
     "kursbuchungen": []
+  },
+  {
+    "id": "213cce10-a175-4b19-ae07-76b24577fa94",
+    "kursId": "96fc618c-8893-4e6e-addf-a35b175e8e5c",
+    "datum": "2026-04-30",
+    "uhrzeit": "20:00",
+    "kursbuchungen": []
+  },
+  {
+    "id": "61d41921-73ba-41ea-af1e-6324d1002f29",
+    "kursId": "96fc618c-8893-4e6e-addf-a35b175e8e5c",
+    "datum": "2026-04-10",
+    "uhrzeit": "20:00",
+    "kursbuchungen": []
   }
 ]
